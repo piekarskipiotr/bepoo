@@ -1,7 +1,13 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+    "sign_in_title": "Let’s start this 15 minutes journey.",
+    "sign_in_subtitle": "Bring together your friends and share your poop stories and watch your toilet statistics.",
+    "sign_in_with": "Sign in with {sign_in_method}",
+      "@sign_in_with": {
+        "placeholders": {
+          "sign_in_method": {
+            "type": "String"
+          }
+        }
+      }
 }

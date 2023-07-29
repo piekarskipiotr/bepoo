@@ -16,6 +16,7 @@
 		AE08D4852A74378C0065B257 /* LaunchScreenProduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE08D47F2A74378C0065B257 /* LaunchScreenProduction.storyboard */; };
 		AE08D4862A74378C0065B257 /* LaunchScreenDevelopment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE08D4812A74378C0065B257 /* LaunchScreenDevelopment.storyboard */; };
 		AE08D4872A74378C0065B257 /* LaunchScreenStaging.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE08D4832A74378C0065B257 /* LaunchScreenStaging.storyboard */; };
+		AEB2658E2A75090E00A1F304 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB2658D2A75090E00A1F304 /* GoogleService-Info.plist */; };
 		EFB94D72349388CE70A2B98F /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD7D74C6836EF16F9E84872 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		AE08D4802A74378C0065B257 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenProduction.storyboard; sourceTree = "<group>"; };
 		AE08D4822A74378C0065B257 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenDevelopment.storyboard; sourceTree = "<group>"; };
 		AE08D4842A74378C0065B257 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenStaging.storyboard; sourceTree = "<group>"; };
+		AEB2658D2A75090E00A1F304 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AEB2658F2A7509C100A1F304 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		B42A4C1F39C25DDC15A1BC59 /* Pods-Runner.debug-production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-production.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-production.xcconfig"; sourceTree = "<group>"; };
 		F096AAC1FD55830505F4E907 /* Pods-Runner.debug-development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-development.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-development.xcconfig"; sourceTree = "<group>"; };
 		FDB6B4F442087808F282B63D /* Pods-Runner.debug-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-staging.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-staging.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				AEB2658F2A7509C100A1F304 /* Runner.entitlements */,
+				AEB2658D2A75090E00A1F304 /* GoogleService-Info.plist */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -160,6 +165,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				638EB7C0C835B047924E8615 /* [CP] Embed Pods Frameworks */,
+				A773DBEA70D571BA868A12CE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -209,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE08D4872A74378C0065B257 /* LaunchScreenStaging.storyboard in Resources */,
+				AEB2658E2A75090E00A1F304 /* GoogleService-Info.plist in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
@@ -290,6 +297,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
+		};
+		A773DBEA70D571BA868A12CE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -406,7 +430,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-production";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = PooApp;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -538,7 +564,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-production";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = PooApp;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -562,7 +590,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-production";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = PooApp;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -641,7 +671,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-development";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[DEV] PooApp";
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -718,7 +750,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-development";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[DEV] PooApp";
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -792,7 +826,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-development";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[DEV] PooApp";
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -871,7 +907,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-staging";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[STG] PooApp";
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -948,7 +986,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-staging";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[STG] PooApp";
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -1022,7 +1062,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-staging";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 57FZDXJ76S;
 				ENABLE_BITCODE = NO;
 				FLAVOR_APP_NAME = "[STG] PooApp";
 				INFOPLIST_FILE = Runner/Info.plist;
