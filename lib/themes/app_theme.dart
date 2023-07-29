@@ -1,5 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
@@ -58,4 +59,8 @@ class AppTheme {
         ),
         borderRadius: BorderRadius.circular(24),
       );
+
+  static bool isDarkMode() =>
+      SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+      Brightness.dark;
 }
