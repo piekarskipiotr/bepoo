@@ -5,23 +5,27 @@ import 'package:injectable/injectable.dart';
 class FirestoreRepository {
   final _firestore = FirebaseFirestore.instance;
 
-  Future<bool> isProfileNameExists(String name) async {
+  Future<bool> isUserNameExists(String name) async {
     try {
-      final doc = await _firestore.collection('profile_names').doc(name).get();
+      final doc = await _firestore.collection('user_names').doc(name).get();
       return doc.exists;
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  Future<dynamic> addProfileName(String name) async {
+  Future<dynamic> addUserName(String name) async {
     try {
-      final exists = await isProfileNameExists(name);
+      if (name.isEmpty) {
+        throw Exception('name-empty');
+      }
+
+      final exists = await isUserNameExists(name);
       if (exists) {
         throw Exception('name-already-exists');
       }
 
-      await _firestore.collection('profile_names').doc(name).set({});
+      await _firestore.collection('user_names').doc(name).set({});
     } catch (e) {
       rethrow;
     }

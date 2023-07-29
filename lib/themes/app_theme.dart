@@ -15,6 +15,17 @@ class AppTheme {
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
         fontFamily: GoogleFonts.inter().fontFamily,
+      ).copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          border: _textFormFieldBorder(),
+          enabledBorder: _textFormFieldBorder(),
+          focusedBorder: _textFormFieldBorder(),
+          errorBorder: _textFormFieldBorder(),
+          disabledBorder: _textFormFieldBorder(),
+          filled: true,
+          fillColor: const Color(0xFFEFECEC),
+          contentPadding: const EdgeInsets.all(24),
+        ),
       );
 
   static ThemeData dark() => FlexThemeData.dark(
@@ -28,5 +39,23 @@ class AppTheme {
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
         fontFamily: GoogleFonts.inter().fontFamily,
+      ).copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          border: _textFormFieldBorder(),
+          enabledBorder: _textFormFieldBorder(),
+          focusedBorder: _textFormFieldBorder(),
+          errorBorder: _textFormFieldBorder(),
+          disabledBorder: _textFormFieldBorder(),
+          filled: true,
+          fillColor: const Color(0xFF211F1F),
+          contentPadding: const EdgeInsets.all(24),
+        ),
+      );
+
+  static InputBorder _textFormFieldBorder() => OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Colors.transparent,
+        ),
+        borderRadius: BorderRadius.circular(24),
       );
 }

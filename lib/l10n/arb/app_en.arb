@@ -9,5 +9,9 @@
             "type": "String"
           }
         }
-      }
+      },
+    "user_name_set_up_title": "How would you like to be named?",
+    "user_name_taken": "User name is already taken :(",
+    "user_name_empty": "User name cannot be empty!",
+    "finish": "Finish"
 }

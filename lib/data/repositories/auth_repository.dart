@@ -64,7 +64,7 @@ class AuthRepository {
 
   Future<dynamic> updateProfile({
     required String name,
-    required String? avatarURL,
+    String? avatarURL,
   }) async {
     try {
       final user = _firebaseAuth.currentUser;
