@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pooapp/data/models/poost.dart';
 
 @lazySingleton
 class FirestoreRepository {
@@ -7,7 +8,7 @@ class FirestoreRepository {
 
   Future<bool> isUserNameExists(String name) async {
     try {
-      final doc = await _firestore.collection('user_names').doc(name).get();
+      final doc = await _firestore.collection('users').doc(name).get();
       return doc.exists;
     } catch (e) {
       throw Exception(e.toString());
@@ -25,9 +26,30 @@ class FirestoreRepository {
         throw Exception('name-already-exists');
       }
 
-      await _firestore.collection('user_names').doc(name).set({});
+      await _firestore.collection('users').doc(name).set({});
     } catch (e) {
       rethrow;
+    }
+  }
+
+  Future<String> generateDocId({required String collection}) async {
+    try {
+      return await _firestore.collection(collection).add({}).then(
+        (ref) => ref.id,
+      );
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<dynamic> addPoost({
+    required String docId,
+    required Poost poost,
+  }) async {
+    try {
+      await _firestore.collection('poosts').doc(docId).set(poost.toJson());
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

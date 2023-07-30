@@ -23,4 +23,21 @@ class CloudStorageRepository {
       throw Exception(e);
     }
   }
+
+  Future<String?> uploadPoostImage({
+    required String docId,
+    required String userName,
+    required XFile image,
+  }) async {
+    try {
+      final timeStamp = DateTime.now().millisecondsSinceEpoch;
+      final imagePath = 'poosts/$docId/$timeStamp.jpg';
+      final avatarRef = _storage.child(imagePath);
+      final imageFile = File(image.path);
+      await avatarRef.putFile(imageFile);
+      return avatarRef.getDownloadURL();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

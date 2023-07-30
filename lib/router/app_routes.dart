@@ -4,4 +4,5 @@ class AppRoutes {
   static String home = '/home';
   static String friends = '/friends';
   static String profile = '/profile';
+  static String permissionRationale = '/permission_rationale';
 }

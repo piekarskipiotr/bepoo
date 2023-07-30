@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pooapp/di/get_it.dart';
 import 'package:pooapp/l10n/l10n.dart';
 import 'package:pooapp/pages/home/view/home_empty_feed.dart';
+import 'package:pooapp/pages/poost_creation/bloc/poost_creation_bloc.dart';
 import 'package:pooapp/pages/poost_creation/poost_creation.dart';
 import 'package:pooapp/resources/resources.dart';
 import 'package:pooapp/router/app_routes.dart';
@@ -52,7 +55,10 @@ class HomePage extends StatelessWidget {
         context: context,
         isScrollControlled: true,
         enableDrag: false,
-        builder: (context) => const PoostCreationPage(),
+        builder: (context) => BlocProvider(
+          create: (_) => getIt<PoostCreationBloc>(),
+          child: const PoostCreationPage(),
+        ),
       ),
       icon: const Icon(Icons.add),
       label: Text(
