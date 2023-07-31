@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pooapp/data/models/user.dart';
 import 'package:pooapp/data/repositories/auth_repository.dart';
 import 'package:pooapp/data/repositories/firestore_repository.dart';
 import 'package:pooapp/pages/user_name_set_up/cubit/user_name_set_up_state.dart';
@@ -42,7 +43,11 @@ class UserNameSetUpCubit extends Cubit<UserNameSetUpState> {
     if (_debounce?.isActive ?? false) return;
     try {
       emit(Finishing());
-      await _firestoreRepository.addUserName(_name ?? '');
+      final currentUser = _authRepository.getCurrentUser();
+      if (currentUser == null) throw Exception('user-not-found');
+
+      final user = User(id: currentUser.uid, name: _name!);
+      await _firestoreRepository.addUser(user);
       await _authRepository.updateProfile(
         name: _name!,
       );

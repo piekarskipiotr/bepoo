@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pooapp/data/models/poost.dart';
+import 'package:pooapp/data/models/user.dart';
 
 @lazySingleton
 class FirestoreRepository {
@@ -15,18 +16,18 @@ class FirestoreRepository {
     }
   }
 
-  Future<dynamic> addUserName(String name) async {
+  Future<dynamic> addUser(User user) async {
     try {
-      if (name.isEmpty) {
+      if (user.name.isEmpty) {
         throw Exception('name-empty');
       }
 
-      final exists = await isUserNameExists(name);
+      final exists = await isUserNameExists(user.name);
       if (exists) {
         throw Exception('name-already-exists');
       }
 
-      await _firestore.collection('users').doc(name).set({});
+      await _firestore.collection('users').doc(user.name).set(user.toJson());
     } catch (e) {
       rethrow;
     }
