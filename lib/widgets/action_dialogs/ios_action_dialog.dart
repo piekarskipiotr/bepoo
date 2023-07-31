@@ -25,13 +25,13 @@ class IOSActionDialog extends StatelessWidget {
       content: Text(subtitle),
       actions: [
         CupertinoDialogAction(
+          onPressed: onSecondaryPressed,
+          child: Text(secondaryText),
+        ),
+        CupertinoDialogAction(
           onPressed: onPrimaryPressed,
           isDestructiveAction: true,
           child: Text(primaryText),
-        ),
-        CupertinoDialogAction(
-          onPressed: onSecondaryPressed,
-          child: Text(secondaryText),
         ),
       ],
     );
