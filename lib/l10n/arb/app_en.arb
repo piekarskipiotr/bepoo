@@ -47,5 +47,6 @@
     "close_poost_creator_title": "Confirm Exit",
     "close_poost_creator_subtitle": "Are you sure you want to exit? Any unsaved changes to your post will be lost.",
     "close": "Close",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "profile": "Profile"
 }

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pooapp/data/repositories/auth_repository.dart';
@@ -38,6 +39,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   bool isAuthenticated() => _authRepository.isAuthenticated();
+
+  User? getCurrentUser() => _authRepository.getCurrentUser();
 
   final AuthRepository _authRepository;
 }

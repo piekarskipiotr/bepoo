@@ -19,8 +19,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: _appBar(context),
-      floatingActionButton: _fab(context),
       body: const HomeEmptyState(),
+      floatingActionButton: _fab(context),
     );
   }
 
