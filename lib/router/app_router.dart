@@ -44,7 +44,7 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.home,
         builder: (context, state) => BlocProvider.value(
-          value: getIt<UserNameSetUpCubit>(),
+          value: getIt<AuthBloc>(),
           child: const HomePage(),
         ),
       ),

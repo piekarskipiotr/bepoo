@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pooapp/resources/resources.dart';
 import 'package:pooapp/themes/app_theme.dart';
 
 class AppBarIcon extends StatelessWidget {
@@ -33,11 +34,18 @@ class AppBarIcon extends StatelessWidget {
                   icon as IconData,
                   color: isDarkMode ? Colors.black : Colors.white,
                 )
-              : SizedBox(
-                  width: 32,
-                  height: 32,
-                  child: Image.asset(icon as String),
-                ),
+              : ClipOval(
+                child: SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Image.network(
+                      icon as String? ?? '',
+                      errorBuilder: (context, _, e) => Image.asset(
+                        AppIcons.appIcon,
+                      ),
+                    ),
+                  ),
+              ),
         ),
       ),
     );

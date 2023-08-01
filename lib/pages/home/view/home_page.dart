@@ -7,7 +7,7 @@ import 'package:pooapp/l10n/l10n.dart';
 import 'package:pooapp/pages/home/view/home_empty_feed.dart';
 import 'package:pooapp/pages/poost_creation/bloc/poost_creation_bloc.dart';
 import 'package:pooapp/pages/poost_creation/poost_creation.dart';
-import 'package:pooapp/resources/resources.dart';
+import 'package:pooapp/pages/sign_in/bloc/auth_bloc.dart';
 import 'package:pooapp/router/app_routes.dart';
 import 'package:pooapp/widgets/app_bar_icon.dart';
 
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
         actions: [
           AppBarIcon(
             onPressed: () => context.push(AppRoutes.profile),
-            icon: AppIcons.appIcon,
+            icon: context.read<AuthBloc>().getCurrentUser()?.photoURL,
           ),
         ],
       );
