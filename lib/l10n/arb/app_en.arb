@@ -48,5 +48,8 @@
     "close_poost_creator_subtitle": "Are you sure you want to exit? Any unsaved changes to your post will be lost.",
     "close": "Close",
     "cancel": "Cancel",
-    "profile": "Profile"
+    "profile": "Profile",
+    "friends": "Friends",
+    "search_friends": "Search for friends...",
+    "add_friend": "Add Friend"
 }

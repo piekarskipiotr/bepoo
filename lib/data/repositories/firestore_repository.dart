@@ -16,6 +16,21 @@ class FirestoreRepository {
     }
   }
 
+  Future<List<User>?> searchForUsers(String username) async {
+    try {
+      final searchText = username.toLowerCase();
+      final querySnapshot = await _firestore
+          .collection('users')
+          .orderBy('lower_case_name')
+          .startAt([searchText]).endAt(['$searchText\uf8ff']).get();
+
+      final documents = querySnapshot.docs;
+      return documents.map((e) => User.fromJson(e.data())).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> addUser(User user) async {
     try {
       if (user.name.isEmpty) {
@@ -27,7 +42,9 @@ class FirestoreRepository {
         throw Exception('name-already-exists');
       }
 
-      await _firestore.collection('users').doc(user.name).set(user.toJson());
+      final json = user.toJson();
+      json['lower_case_name'] = user.name.toLowerCase();
+      await _firestore.collection('users').doc(user.name).set(json);
     } catch (e) {
       rethrow;
     }

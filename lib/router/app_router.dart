@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pooapp/data/enums/app_permission.dart';
 import 'package:pooapp/di/get_it.dart';
+import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
+import 'package:pooapp/pages/friends/friends.dart';
 import 'package:pooapp/pages/home/home.dart';
 import 'package:pooapp/pages/permission_rationale/permission_rationale.dart';
 import 'package:pooapp/pages/profile/profile.dart';
@@ -50,8 +52,9 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.friends,
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: Text(AppRoutes.friends)),
+        builder: (context, state) => BlocProvider.value(
+          value: getIt<FriendsCubit>(),
+          child: const FriendsPage(),
         ),
       ),
       GoRoute(
