@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/data/models/user.dart';
+import 'package:pooapp/data/models/user_data.dart';
 import 'package:pooapp/l10n/l10n.dart';
 import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
 import 'package:pooapp/pages/friends/cubit/friends_state.dart';
@@ -36,7 +36,7 @@ class FriendsPage extends StatelessWidget {
             BlocBuilder(
               bloc: context.read<FriendsCubit>(),
               builder: (context, state) {
-                final users = List<User>.empty(growable: true);
+                final users = List<UserData>.empty(growable: true);
                 if (state is ReturningSearchData) {
                   users
                     ..clear()

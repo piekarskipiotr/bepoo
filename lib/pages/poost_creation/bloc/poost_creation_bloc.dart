@@ -7,7 +7,7 @@ import 'package:pooapp/data/enums/poop_type.dart';
 import 'package:pooapp/data/models/poost.dart';
 import 'package:pooapp/data/repositories/auth_repository.dart';
 import 'package:pooapp/data/repositories/cloud_storage_repository.dart';
-import 'package:pooapp/data/repositories/firestore_repository.dart';
+import 'package:pooapp/data/repositories/firestore/firestore_poosts_repository.dart';
 
 part 'poost_creation_event.dart';
 part 'poost_creation_state.dart';
@@ -17,7 +17,7 @@ class PoostCreationBloc extends Bloc<PoostCreationEvent, PoostCreationState> {
   PoostCreationBloc(
     this._authRepository,
     this._cloudStorageRepository,
-    this._firestoreRepository,
+    this._poostsRepository,
   ) : super(AwaitingForFormSubmit()) {
     on<CreatePoost>((event, emit) async {
       emit(Creating());
@@ -31,10 +31,7 @@ class PoostCreationBloc extends Bloc<PoostCreationEvent, PoostCreationState> {
           throw Exception('current-user-data-not-found');
         }
 
-        final docId = await _firestoreRepository.generateDocId(
-          collection: 'poosts',
-        );
-
+        final docId = await _poostsRepository.generateDocId();
         final imageUrl = await _cloudStorageRepository.uploadPoostImage(
           docId: docId,
           userName: currentUser.displayName!,
@@ -52,7 +49,7 @@ class PoostCreationBloc extends Bloc<PoostCreationEvent, PoostCreationState> {
           description: description,
         );
 
-        await _firestoreRepository.addPoost(docId: docId, poost: poost);
+        await _poostsRepository.addPoost(docId: docId, poost: poost);
         emit(Created());
       } catch (e) {
         emit(CreatingError(e.toString()));
@@ -67,7 +64,7 @@ class PoostCreationBloc extends Bloc<PoostCreationEvent, PoostCreationState> {
 
   final AuthRepository _authRepository;
   final CloudStorageRepository _cloudStorageRepository;
-  final FirestoreRepository _firestoreRepository;
+  final FirestorePoostsRepository _poostsRepository;
 
   XFile? image;
   PoopType? poopType;

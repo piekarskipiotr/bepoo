@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/data/models/user.dart';
+import 'package:pooapp/data/models/user_data.dart';
 import 'package:pooapp/l10n/l10n.dart';
 import 'package:pooapp/resources/resources.dart';
 import 'package:pooapp/widgets/buttons/primary_action_button.dart';
@@ -8,7 +8,7 @@ import 'package:pooapp/widgets/buttons/primary_action_button.dart';
 class FriendItem extends StatelessWidget {
   const FriendItem({required this.user, super.key});
 
-  final User user;
+  final UserData user;
 
   @override
   Widget build(BuildContext context) {

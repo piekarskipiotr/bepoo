@@ -1,16 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'user.freezed.dart';
-part 'user.g.dart';
+part 'user_data.freezed.dart';
+part 'user_data.g.dart';
 
 @freezed
-class User with _$User {
-  factory User({
+class UserData with _$UserData {
+  factory UserData({
     required String id,
     required String name,
     String? avatarUrl,
   }) {
-    return _User(
+    return _UserData(
       id: id,
       name: name,
       avatarUrl: avatarUrl,
@@ -19,13 +19,14 @@ class User with _$User {
     );
   }
 
-  const factory User.def({
+  const factory UserData.def({
     required String id,
     required String name,
     required String? avatarUrl,
     required DateTime createdAt,
     required DateTime? updatedAt,
-  }) = _User;
+  }) = _UserData;
 
-  factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
+  factory UserData.fromJson(Map<String, Object?> json) =>
+      _$UserDataFromJson(json);
 }
