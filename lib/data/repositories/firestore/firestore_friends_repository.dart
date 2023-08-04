@@ -1,23 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pooapp/data/models/user_data.dart';
+import 'package:pooapp/data/models/user_friends_info.dart';
 
 @lazySingleton
 class FirestoreFriendsRepository {
   static const _collection = 'friends';
   final _firestore = FirebaseFirestore.instance.collection(_collection);
 
+  Future<UserFriendsInfo> createDocument(UserData user) async {
+    try {
+      final userFriendsInfo = UserFriendsInfo();
+      final json = userFriendsInfo.toJson();
+      await _firestore.doc(user.id).set(json);
+
+      return userFriendsInfo;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<dynamic> sendFriendRequest({
-    required UserData currentUser,
+    required User currentUser,
     required UserData targetUser,
   }) async {
     try {
       await Future.wait([
-        _firestore.doc(currentUser.id).update({
-          'ownRequests.${targetUser.id}': targetUser.toJson(),
+        _firestore.doc(currentUser.uid).update({
+          'sentRequests': FieldValue.arrayUnion([
+            {targetUser.id: true},
+          ]),
         }),
         _firestore.doc(targetUser.id).update({
-          'friendRequests.${currentUser.id}': currentUser.toJson(),
+          'receivedRequests': FieldValue.arrayUnion([
+            {currentUser.uid: true},
+          ]),
         }),
       ]);
     } catch (e) {
@@ -26,16 +44,20 @@ class FirestoreFriendsRepository {
   }
 
   Future<void> cancelFriendRequest({
-    required UserData currentUser,
+    required User currentUser,
     required UserData targetUser,
   }) async {
     try {
       await Future.wait([
-        _firestore.doc(currentUser.id).update({
-          'ownRequests.${targetUser.id}': FieldValue.delete(),
+        _firestore.doc(currentUser.uid).update({
+          'sentRequests': FieldValue.arrayRemove([
+            {targetUser.id: true},
+          ]),
         }),
         _firestore.doc(targetUser.id).update({
-          'friendRequests.${currentUser.id}': FieldValue.delete(),
+          'receivedRequests': FieldValue.arrayRemove([
+            {currentUser.uid: true},
+          ]),
         }),
       ]);
     } catch (e) {
@@ -44,16 +66,20 @@ class FirestoreFriendsRepository {
   }
 
   Future<void> declineFriendRequest({
-    required UserData currentUser,
+    required User currentUser,
     required UserData targetUser,
   }) async {
     try {
       await Future.wait([
-        _firestore.doc(currentUser.id).update({
-          'friendRequests.${targetUser.id}': FieldValue.delete(),
+        _firestore.doc(currentUser.uid).update({
+          'receivedRequests': FieldValue.arrayRemove([
+            {targetUser.id: true},
+          ]),
         }),
         _firestore.doc(targetUser.id).update({
-          'ownRequests.${currentUser.id}': FieldValue.delete(),
+          'sentRequests': FieldValue.arrayRemove([
+            {currentUser.uid: true},
+          ]),
         }),
       ]);
     } catch (e) {
@@ -62,16 +88,20 @@ class FirestoreFriendsRepository {
   }
 
   Future<void> removeFriend({
-    required UserData currentUser,
+    required User currentUser,
     required UserData targetUser,
   }) async {
     try {
       await Future.wait([
-        _firestore.doc(currentUser.id).update({
-          'allFriends.${targetUser.id}': FieldValue.delete(),
+        _firestore.doc(currentUser.uid).update({
+          'allFriends': FieldValue.arrayRemove([
+            {targetUser.id: true},
+          ]),
         }),
         _firestore.doc(targetUser.id).update({
-          'allFriends.${currentUser.id}': FieldValue.delete(),
+          'allFriends': FieldValue.arrayRemove([
+            {currentUser.uid: true},
+          ]),
         }),
       ]);
     } catch (e) {
@@ -80,18 +110,22 @@ class FirestoreFriendsRepository {
   }
 
   Future<void> acceptFriendRequest({
-    required UserData currentUser,
+    required User currentUser,
     required UserData targetUser,
   }) async {
     try {
       await Future.wait([
-        _firestore.doc(currentUser.id).update({
-          'allFriends.${targetUser.id}': targetUser.toJson(),
-          'friendRequests.${targetUser.id}': FieldValue.delete(),
+        _firestore.doc(currentUser.uid).update({
+          'allFriends.${targetUser.id}': true,
+          'receivedRequests': FieldValue.arrayRemove([
+            {targetUser.id: true},
+          ]),
         }),
         _firestore.doc(targetUser.id).update({
-          'allFriends.${currentUser.id}': currentUser.toJson(),
-          'ownRequests.${currentUser.id}': FieldValue.delete(),
+          'allFriends.${currentUser.uid}': true,
+          'sentRequests': FieldValue.arrayRemove([
+            {currentUser.uid: true},
+          ]),
         }),
       ]);
     } catch (e) {
@@ -99,67 +133,12 @@ class FirestoreFriendsRepository {
     }
   }
 
-  Future<bool> isFriend({
-    required UserData currentUser,
-    required UserData targetUser,
-  }) async {
+  Future<UserFriendsInfo?> getUserFriendsInfo({required UserData user}) async {
     try {
-      final snapshot = await _firestore.doc(targetUser.id).get();
-
-      if (snapshot.exists &&
-          snapshot.data() != null &&
-          snapshot.data()!.containsKey('allFriends')) {
-        final data = snapshot.data();
-        final friends = data?['allFriends'] as Map<String, dynamic>;
-
-        return friends.containsKey(currentUser.id);
-      } else {
-        return false;
-      }
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
-
-  Future<bool> isAwaitingForAccept({
-    required UserData currentUser,
-    required UserData targetUser,
-  }) async {
-    try {
-      final snapshot = await _firestore.doc(currentUser.id).get();
-
-      if (snapshot.exists &&
-          snapshot.data() != null &&
-          snapshot.data()!.containsKey('ownRequests')) {
-        final data = snapshot.data();
-        final friends = data?['ownRequests'] as Map<String, dynamic>;
-
-        return friends.containsKey(targetUser.id);
-      } else {
-        return false;
-      }
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
-
-  Future<bool> isFriendRequest({
-    required UserData currentUser,
-    required UserData targetUser,
-  }) async {
-    try {
-      final snapshot = await _firestore.doc(targetUser.id).get();
-
-      if (snapshot.exists &&
-          snapshot.data() != null &&
-          snapshot.data()!.containsKey('friendRequests')) {
-        final data = snapshot.data();
-        final friends = data?['friendRequests'] as Map<String, dynamic>;
-
-        return friends.containsKey(currentUser.id);
-      } else {
-        return false;
-      }
+      final snapshot = await _firestore.doc(user.id).get();
+      final data = snapshot.data();
+      if (data == null) throw Exception('fail-to-fetch-user-friends-info');
+      return UserFriendsInfo.fromJson(data);
     } catch (e) {
       throw Exception(e.toString());
     }

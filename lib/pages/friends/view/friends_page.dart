@@ -2,28 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/data/models/user_data.dart';
 import 'package:pooapp/l10n/l10n.dart';
 import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
-import 'package:pooapp/pages/friends/cubit/friends_state.dart';
 import 'package:pooapp/pages/friends/view/friend_item.dart';
 import 'package:pooapp/widgets/app_bar_icon.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class FriendsPage extends StatelessWidget {
+class FriendsPage extends StatefulWidget {
   const FriendsPage({super.key});
+
+  @override
+  State<FriendsPage> createState() => _FriendsPageState();
+}
+
+class _FriendsPageState extends State<FriendsPage> {
+  final _refreshController = RefreshController();
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+
     return Scaffold(
-      appBar: _appBar(context),
+      appBar: _appBar(),
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 32,
+              ),
               child: TextFormField(
-                onChanged: (v) => context.read<FriendsCubit>().search(v),
+                onChanged: (v) {
+                  _refreshController.resetNoData();
+                  context.read<FriendsCubit>().search(v);
+                },
                 style: GoogleFonts.inter(),
                 autofocus: true,
                 decoration: InputDecoration(
@@ -33,34 +46,16 @@ class FriendsPage extends StatelessWidget {
                 ),
               ),
             ),
-            BlocBuilder(
-              bloc: context.read<FriendsCubit>(),
-              builder: (context, state) {
-                final users = List<UserData>.empty(growable: true);
-                if (state is ReturningSearchData) {
-                  users
-                    ..clear()
-                    ..addAll(state.users ?? []);
-                }
-
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: users.length,
-                    itemBuilder: (context, index) => FriendItem(
-                      user: users[index],
-                    ),
-                  ),
-                );
-              },
-            ),
+            _friendsList(),
           ],
         ),
       ),
     );
   }
 
-  PreferredSizeWidget _appBar(BuildContext context) {
+  PreferredSizeWidget _appBar() {
     final l10n = context.l10n;
+
     return AppBar(
       surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.transparent,
@@ -76,6 +71,32 @@ class FriendsPage extends StatelessWidget {
         icon: Icons.arrow_back_ios_new,
         isLeading: true,
       ),
+    );
+  }
+
+  Widget _friendsList() {
+    return BlocBuilder(
+      bloc: context.read<FriendsCubit>(),
+      builder: (context, state) {
+        final users = context.read<FriendsCubit>().usersList;
+
+        return Expanded(
+          child: SmartRefresher(
+            controller: _refreshController,
+            enablePullUp: users.length >= 10,
+            enablePullDown: false,
+            onLoading: () => context.read<FriendsCubit>().fetchNextPage(
+                  _refreshController,
+                ),
+            child: ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) => FriendItem(
+                user: users[index],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
