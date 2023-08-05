@@ -94,12 +94,12 @@ class FirestoreFriendsRepository {
     try {
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
-          'allFriends': FieldValue.arrayRemove([
+          'friends': FieldValue.arrayRemove([
             {targetUser.id: true},
           ]),
         }),
         _firestore.doc(targetUser.id).update({
-          'allFriends': FieldValue.arrayRemove([
+          'friends': FieldValue.arrayRemove([
             {currentUser.uid: true},
           ]),
         }),
@@ -116,13 +116,13 @@ class FirestoreFriendsRepository {
     try {
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
-          'allFriends.${targetUser.id}': true,
+          'friends.${targetUser.id}': true,
           'receivedRequests': FieldValue.arrayRemove([
             {targetUser.id: true},
           ]),
         }),
         _firestore.doc(targetUser.id).update({
-          'allFriends.${currentUser.uid}': true,
+          'friends.${currentUser.uid}': true,
           'sentRequests': FieldValue.arrayRemove([
             {currentUser.uid: true},
           ]),
@@ -133,9 +133,9 @@ class FirestoreFriendsRepository {
     }
   }
 
-  Future<UserFriendsInfo?> getUserFriendsInfo({required UserData user}) async {
+  Future<UserFriendsInfo?> getUserFriendsInfo({required String userId}) async {
     try {
-      final snapshot = await _firestore.doc(user.id).get();
+      final snapshot = await _firestore.doc(userId).get();
       final data = snapshot.data();
       if (data == null) throw Exception('fail-to-fetch-user-friends-info');
       return UserFriendsInfo.fromJson(data);

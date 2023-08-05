@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pooapp/l10n/l10n.dart';
 import 'package:pooapp/resources/resources.dart';
 
-class HomeEmptyState extends StatelessWidget {
-  const HomeEmptyState({super.key});
+class HomeEmptyFeed extends StatelessWidget {
+  const HomeEmptyFeed({super.key});
 
   @override
   Widget build(BuildContext context) {

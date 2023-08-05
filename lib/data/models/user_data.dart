@@ -33,6 +33,4 @@ class UserData with _$UserData {
 
   factory UserData.fromJson(Map<String, Object?> json) =>
       _$UserDataFromJson(json);
-
-
 }

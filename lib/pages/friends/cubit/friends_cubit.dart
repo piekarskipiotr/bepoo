@@ -49,7 +49,7 @@ class FriendsCubit extends Cubit<FriendsState> {
           _lastDocSnap = lastDocumentSnapshot;
           for (final user in users) {
             final friendsInfo = await _friendsRepository.getUserFriendsInfo(
-              user: user,
+              userId: user.id,
             );
 
             _fillUserFriendsInfo(users, user, friendsInfo);
@@ -83,7 +83,7 @@ class FriendsCubit extends Cubit<FriendsState> {
 
       for (final user in users ?? <UserData>[]) {
         final friendsInfo = await _friendsRepository.getUserFriendsInfo(
-          user: user,
+          userId: user.id,
         );
 
         _fillUserFriendsInfo(users ?? <UserData>[], user, friendsInfo);

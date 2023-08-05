@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pooapp/pages/home/cubit/home_feed_cubit.dart';
+import 'package:pooapp/pages/home/view/home_empty_feed.dart';
+import 'package:pooapp/pages/home/view/poost_item.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+class HomeFeed extends StatefulWidget {
+  const HomeFeed({super.key});
+
+  @override
+  State<HomeFeed> createState() => _HomeFeedState();
+}
+
+class _HomeFeedState extends State<HomeFeed> {
+  final _refreshController = RefreshController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeFeedCubit>().fetchPoosts();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder(
+      bloc: context.read<HomeFeedCubit>(),
+      builder: (context, state) {
+        final poosts = context.read<HomeFeedCubit>().poostsList;
+        if (poosts.isEmpty) return const HomeEmptyFeed();
+
+        return SmartRefresher(
+          controller: _refreshController,
+          enablePullUp: poosts.length >= 5,
+          onRefresh: () => context.read<HomeFeedCubit>().fetchPoosts(
+                refreshController: _refreshController,
+              ),
+          onLoading: () => context.read<HomeFeedCubit>().fetchNextPage(
+                _refreshController,
+              ),
+          child: ListView.builder(
+            itemCount: poosts.length,
+            itemBuilder: (context, index) => PoostItem(
+              poost: poosts[index],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

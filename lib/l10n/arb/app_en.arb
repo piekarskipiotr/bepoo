@@ -55,5 +55,6 @@
     "view_profile": "View Profile",
     "awaiting_for_accept": "Awaiting",
     "accept": "Accept",
-    "decline": "Decline"
+    "decline": "Decline",
+    "cannot_load_the_image": "Cannot load the image :("
 }

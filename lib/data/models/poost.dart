@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pooapp/data/enums/poop_type.dart';
 import 'package:pooapp/data/models/comment.dart';
+import 'package:pooapp/data/models/user_data.dart';
 import 'package:uuid/uuid.dart';
 
 part 'poost.freezed.dart';
-
 part 'poost.g.dart';
 
 typedef UUID = String;
@@ -38,6 +38,8 @@ class Poost with _$Poost {
     required DateTime createdAt,
     required DateTime? updatedAt,
     required List<Comment> comments,
+    // ignore: invalid_annotation_target
+    @JsonKey(includeToJson: false, includeFromJson: false) UserData? userData,
   }) = _Poost;
 
   factory Poost.fromJson(Map<String, Object?> json) => _$PoostFromJson(json);

@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pooapp/di/get_it.dart';
 import 'package:pooapp/l10n/l10n.dart';
-import 'package:pooapp/pages/home/view/home_empty_feed.dart';
+import 'package:pooapp/pages/home/cubit/home_feed_cubit.dart';
+import 'package:pooapp/pages/home/view/home_feed.dart';
 import 'package:pooapp/pages/poost_creation/bloc/poost_creation_bloc.dart';
 import 'package:pooapp/pages/poost_creation/poost_creation.dart';
 import 'package:pooapp/pages/sign_in/bloc/auth_bloc.dart';
@@ -17,16 +18,19 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: context.watch<HomeFeedCubit>().poostsList.isEmpty,
       appBar: _appBar(context),
-      body: const HomeEmptyState(),
+      body: BlocProvider.value(
+        value: context.read<HomeFeedCubit>(),
+        child: const HomeFeed(),
+      ),
       floatingActionButton: _fab(context),
     );
   }
 
   PreferredSizeWidget _appBar(BuildContext context) => AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: true,
         title: Text(
           'PooApp',

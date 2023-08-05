@@ -5,6 +5,7 @@ import 'package:pooapp/data/enums/app_permission.dart';
 import 'package:pooapp/di/get_it.dart';
 import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
 import 'package:pooapp/pages/friends/friends.dart';
+import 'package:pooapp/pages/home/cubit/home_feed_cubit.dart';
 import 'package:pooapp/pages/home/home.dart';
 import 'package:pooapp/pages/permission_rationale/permission_rationale.dart';
 import 'package:pooapp/pages/profile/profile.dart';
@@ -45,8 +46,15 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.home,
-        builder: (context, state) => BlocProvider.value(
-          value: getIt<AuthBloc>(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: getIt<AuthBloc>(),
+            ),
+            BlocProvider.value(
+              value: getIt<HomeFeedCubit>(),
+            ),
+          ],
           child: const HomePage(),
         ),
       ),
