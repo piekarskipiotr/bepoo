@@ -51,5 +51,9 @@
     "profile": "Profile",
     "friends": "Friends",
     "search_friends": "Search for friends...",
-    "add_friend": "Add Friend"
+    "add_friend": "Add Friend",
+    "view_profile": "View Profile",
+    "awaiting_for_accept": "Awaiting",
+    "accept": "Accept",
+    "decline": "Decline"
 }

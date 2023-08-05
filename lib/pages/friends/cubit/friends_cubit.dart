@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pooapp/data/models/user_data.dart';
+import 'package:pooapp/data/models/user_friends_info.dart';
 import 'package:pooapp/data/repositories/auth_repository.dart';
 import 'package:pooapp/data/repositories/firestore/firestore_friends_repository.dart';
 import 'package:pooapp/data/repositories/firestore/firestore_users_repository.dart';
@@ -50,6 +51,8 @@ class FriendsCubit extends Cubit<FriendsState> {
             final friendsInfo = await _friendsRepository.getUserFriendsInfo(
               user: user,
             );
+
+            _fillUserFriendsInfo(users, user, friendsInfo);
           }
 
           usersList.addAll(users);
@@ -78,6 +81,14 @@ class FriendsCubit extends Cubit<FriendsState> {
       final lastDocumentSnapshot = pageResults.$2;
       _lastDocSnap = lastDocumentSnapshot;
 
+      for (final user in users ?? <UserData>[]) {
+        final friendsInfo = await _friendsRepository.getUserFriendsInfo(
+          user: user,
+        );
+
+        _fillUserFriendsInfo(users ?? <UserData>[], user, friendsInfo);
+      }
+
       usersList.addAll(users ?? []);
       emit(ReturningNextPageData());
       (users?.isEmpty ?? true)
@@ -87,5 +98,18 @@ class FriendsCubit extends Cubit<FriendsState> {
       emit(FetchingNextPageFailed(e.toString()));
       refreshController.loadFailed();
     }
+  }
+
+  void _fillUserFriendsInfo(
+    List<UserData> users,
+    UserData user,
+    UserFriendsInfo? friendsInfo,
+  ) {
+    final indexOfUser = users.indexOf(user);
+    final filledUser = user.copyWith(friendsInfo: friendsInfo);
+
+    users
+      ..remove(user)
+      ..insert(indexOfUser, filledUser);
   }
 }

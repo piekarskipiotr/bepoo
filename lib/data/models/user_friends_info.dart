@@ -29,8 +29,8 @@ class UserFriendsInfo with _$UserFriendsInfo {
       friends.singleWhereOrNull((f) => f.containsKey(userId)) != null;
 
   bool isAwaiting({required String userId}) =>
-      sentRequests.singleWhereOrNull((f) => f.containsKey(userId)) != null;
+      receivedRequests.singleWhereOrNull((f) => f.containsKey(userId)) != null;
 
   bool hasRequested({required String userId}) =>
-      receivedRequests.singleWhereOrNull((f) => f.containsKey(userId)) != null;
+      sentRequests.singleWhereOrNull((f) => f.containsKey(userId)) != null;
 }
