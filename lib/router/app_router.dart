@@ -8,6 +8,7 @@ import 'package:pooapp/pages/friends/friends.dart';
 import 'package:pooapp/pages/home/cubit/home_feed_cubit.dart';
 import 'package:pooapp/pages/home/home.dart';
 import 'package:pooapp/pages/permission_rationale/permission_rationale.dart';
+import 'package:pooapp/pages/profile/bloc/profile_bloc.dart';
 import 'package:pooapp/pages/profile/profile.dart';
 import 'package:pooapp/pages/sign_in/sign_in.dart';
 import 'package:pooapp/pages/user_name_set_up/user_name_set_up.dart';
@@ -67,8 +68,15 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.profile,
-        builder: (context, state) => BlocProvider.value(
-          value: getIt<AuthBloc>(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: getIt<AuthBloc>(),
+            ),
+            BlocProvider.value(
+              value: getIt<ProfileBloc>(),
+            ),
+          ],
           child: const ProfilePage(),
         ),
       ),

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pooapp/data/app_hive.dart';
 import 'package:pooapp/di/get_it.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -28,10 +29,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   };
 
   Bloc.observer = const AppBlocObserver();
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await AppHive.init();
   configureDependencies();
-
   runApp(await builder());
 }

@@ -29,8 +29,6 @@ class _PoostItemState extends State<PoostItem> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Container(
@@ -41,70 +39,7 @@ class _PoostItemState extends State<PoostItem> {
         ),
         child: Column(
           children: [
-            Container(
-              width: MediaQuery.of(context).size.shortestSide,
-              height: MediaQuery.of(context).size.shortestSide,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(24)),
-                color: Color(0xFF211F1F),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(24)),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.network(
-                        _poost.imageUrl,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, _, e) => Center(
-                          child: Text(
-                            l10n.cannot_load_the_image,
-                            style: GoogleFonts.inter(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          bottom: 16,
-                          right: 72,
-                        ),
-                        alignment: Alignment.bottomLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            OutlinedActionButton(
-                              onPressed: () {},
-                              title:
-                                  '${_poost.poopType.emoji} ${_poost.poopType.getName(context)}',
-                              textColor: Colors.white,
-                              borderColor: Colors.white,
-                            ),
-                            const SizedBox(height: 4),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 4),
-                              child: Text(
-                                _poost.poopType.getDescription(context),
-                                style: GoogleFonts.inter(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            _imageWidget(),
             const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -126,8 +61,10 @@ class _PoostItemState extends State<PoostItem> {
                               padding: const EdgeInsets.all(4),
                               child: ClipOval(
                                 child: (_user.avatarUrl?.isEmpty ?? true)
-                                    ? Image.asset(AppIcons.appIcon,
-                                        fit: BoxFit.cover)
+                                    ? Image.asset(
+                                        AppIcons.appIcon,
+                                        fit: BoxFit.cover,
+                                      )
                                     : Image.network(
                                         _user.avatarUrl ?? 'url-not-found',
                                         fit: BoxFit.fill,
@@ -153,19 +90,91 @@ class _PoostItemState extends State<PoostItem> {
                       Container(),
                     ],
                   ),
-                  const SizedBox(height: 16),
                   if (_poost.description?.isNotEmpty ?? false) ...[
+                    const SizedBox(height: 16),
                     Text(
                       _poost.description!,
                       style: GoogleFonts.inter(),
                     ),
-                    const SizedBox(height: 16),
                   ],
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _imageWidget() {
+    final l10n = context.l10n;
+
+    return Container(
+      width: MediaQuery.of(context).size.shortestSide,
+      height: MediaQuery.of(context).size.shortestSide,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(24)),
+        color: Color(0xFF211F1F),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(24)),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.network(
+                _poost.imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, _, e) => Center(
+                  child: Text(
+                    l10n.cannot_load_the_image,
+                    style: GoogleFonts.inter(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              _poopTypeInfo(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _poopTypeInfo() {
+    final poopType = _poost.poopType;
+    return Container(
+      padding: const EdgeInsets.only(
+        left: 16,
+        bottom: 16,
+        right: 72,
+      ),
+      alignment: Alignment.bottomLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          OutlinedActionButton(
+            onPressed: () {},
+            title: '${poopType.emoji} ${poopType.getName(context)}',
+            textColor: Colors.white,
+            borderColor: Colors.white,
+          ),
+          const SizedBox(height: 4),
+          Padding(
+            padding: const EdgeInsets.only(left: 4),
+            child: Text(
+              _poost.poopType.getDescription(context),
+              style: GoogleFonts.inter(
+                fontSize: 12,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

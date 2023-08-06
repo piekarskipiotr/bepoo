@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pooapp/l10n/l10n.dart';
+import 'package:pooapp/pages/home/view/poost_item.dart';
+import 'package:pooapp/pages/profile/bloc/profile_bloc.dart';
 import 'package:pooapp/pages/profile/view/profile_header.dart';
 import 'package:pooapp/pages/sign_in/bloc/auth_bloc.dart';
 import 'package:pooapp/widgets/app_bar_icon.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -15,17 +18,121 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProfileBloc>().add(FetchPoosts(_focusedDay));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
+          padding: const EdgeInsets.symmetric(vertical: 48),
           child: Center(
             child: Column(
               children: [
                 ProfileHeader(user: context.read<AuthBloc>().getCurrentUser()),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 24,
+                    horizontal: 16,
+                  ),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF181717),
+                      borderRadius: BorderRadius.all(Radius.circular(24)),
+                    ),
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                      right: 8,
+                      top: 8,
+                      bottom: 16,
+                    ),
+                    child: TableCalendar(
+                      firstDay: DateTime(2023, 8),
+                      lastDay: DateTime.now(),
+                      focusedDay: _focusedDay,
+                      calendarFormat: _calendarFormat,
+                      calendarStyle: CalendarStyle(
+                        defaultTextStyle: GoogleFonts.inter(),
+                        weekendTextStyle: GoogleFonts.inter(),
+                        todayDecoration: const BoxDecoration(
+                          color: Color(0xFF8D7F7D),
+                          shape: BoxShape.circle,
+                        ),
+                        selectedDecoration: const BoxDecoration(
+                          color: Color(0xFF452F2B),
+                          shape: BoxShape.circle,
+                        ),
+                        markerDecoration: const BoxDecoration(
+                          color: Color(0xFFEED6A6),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      headerStyle: HeaderStyle(
+                        titleCentered: true,
+                        formatButtonVisible: false,
+                        titleTextStyle: GoogleFonts.inter(fontSize: 16),
+                      ),
+                      eventLoader: (date) =>
+                          context.read<ProfileBloc>().getPoostsCountByDate(
+                                date,
+                              ),
+                      selectedDayPredicate: (day) {
+                        return isSameDay(_selectedDay, day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        context.read<ProfileBloc>().add(
+                              FetchPoosts(selectedDay),
+                            );
+
+                        if (!isSameDay(_selectedDay, selectedDay)) {
+                          setState(() {
+                            _selectedDay = selectedDay;
+                            _focusedDay = focusedDay;
+                          });
+                        }
+                      },
+                      onFormatChanged: (format) {
+                        if (_calendarFormat != format) {
+                          setState(() {
+                            _calendarFormat = format;
+                          });
+                        }
+                      },
+                      onPageChanged: (focusedDay) {
+                        _focusedDay = focusedDay;
+                      },
+                    ),
+                  ),
+                ),
+                BlocBuilder(
+                  bloc: context.read<ProfileBloc>(),
+                  builder: (context, state) {
+                    final poosts = context.read<ProfileBloc>().poostsList;
+                    if (state is FetchingPoosts) {
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    }
+
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: poosts.length,
+                      itemBuilder: (context, index) => PoostItem(
+                        poost: poosts[index],
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

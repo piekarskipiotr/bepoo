@@ -1,0 +1,28 @@
+part of 'profile_bloc.dart';
+
+@immutable
+abstract class ProfileState extends Equatable {}
+
+class Initialize extends ProfileState {
+  @override
+  List<Object?> get props => [];
+}
+
+class FetchingPoosts extends ProfileState {
+  @override
+  List<Object?> get props => [];
+}
+
+class FetchingPoostsSucceeded extends ProfileState {
+  @override
+  List<Object?> get props => [];
+}
+
+class FetchingPoostsFailed extends ProfileState {
+  FetchingPoostsFailed(this.error);
+
+  final String error;
+
+  @override
+  List<Object?> get props => [error];
+}

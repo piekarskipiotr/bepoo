@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pooapp/data/app_hive.dart';
 import 'package:pooapp/data/models/poost.dart';
 
 @lazySingleton
@@ -14,6 +15,7 @@ class FirestorePoostsRepository {
   }) async {
     try {
       await _firestore.doc(docId).set(poost.toJson());
+      await poostsBox.put(poost.id, poost.toJson());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -32,7 +34,7 @@ class FirestorePoostsRepository {
   ) async {
     try {
       final querySnapshot = await _firestore
-          .orderBy('createdAt')
+          .orderBy('createdAt', descending: true)
           .where('userId', whereIn: usersId)
           .limit(_pageSize)
           .get();
@@ -52,7 +54,7 @@ class FirestorePoostsRepository {
   ) async {
     try {
       final querySnapshot = await _firestore
-          .orderBy('createdAt')
+          .orderBy('createdAt', descending: true)
           .where('userId', whereIn: usersId)
           .startAfterDocument(lastDocSnap)
           .limit(_pageSize)
@@ -65,5 +67,46 @@ class FirestorePoostsRepository {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  List<Poost> getPoostsByDate(DateTime date) {
+    final poosts = _getLocalPoosts();
+    return poosts.where((poost) {
+      final poostDate = DateTime(
+        poost.createdAt.year,
+        poost.createdAt.month,
+        poost.createdAt.day,
+      );
+
+      return poostDate.isAtSameMomentAs(date);
+    }).toList();
+  }
+
+  int countPoostsByDate(DateTime date) {
+    final poosts = _getLocalPoosts();
+    return poosts
+        .where((poost) {
+          final poostDate = DateTime(
+            poost.createdAt.year,
+            poost.createdAt.month,
+            poost.createdAt.day,
+          );
+
+          return poostDate.isAtSameMomentAs(date);
+        })
+        .toList()
+        .length;
+  }
+
+  List<Poost> _getLocalPoosts() {
+    final values =
+        poostsBox.values.map((e) => e.cast<String, dynamic>()).toList();
+
+    final poosts = List<Poost>.empty(growable: true);
+    for (final json in values) {
+      poosts.add(Poost.fromJson(json as Map<String, dynamic>));
+    }
+
+    return poosts;
   }
 }

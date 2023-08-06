@@ -27,7 +27,6 @@ class _HomeFeedState extends State<HomeFeed> {
       bloc: context.read<HomeFeedCubit>(),
       builder: (context, state) {
         final poosts = context.read<HomeFeedCubit>().poostsList;
-        if (poosts.isEmpty) return const HomeEmptyFeed();
 
         return SmartRefresher(
           controller: _refreshController,
@@ -38,12 +37,14 @@ class _HomeFeedState extends State<HomeFeed> {
           onLoading: () => context.read<HomeFeedCubit>().fetchNextPage(
                 _refreshController,
               ),
-          child: ListView.builder(
-            itemCount: poosts.length,
-            itemBuilder: (context, index) => PoostItem(
-              poost: poosts[index],
-            ),
-          ),
+          child: poosts.isEmpty
+              ? const HomeEmptyFeed()
+              : ListView.builder(
+                  itemCount: poosts.length,
+                  itemBuilder: (context, index) => PoostItem(
+                    poost: poosts[index],
+                  ),
+                ),
         );
       },
     );

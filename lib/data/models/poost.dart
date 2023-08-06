@@ -42,7 +42,7 @@ class Poost with _$Poost {
     @JsonKey(includeToJson: false, includeFromJson: false) UserData? userData,
   }) = _Poost;
 
-  factory Poost.fromJson(Map<String, Object?> json) => _$PoostFromJson(json);
+  factory Poost.fromJson(Map<String, dynamic> json) => _$PoostFromJson(json);
 
   static UUID _generateUuid() {
     const uuid = Uuid();
