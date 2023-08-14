@@ -39,3 +39,22 @@ class FetchingNextPageFailed extends FriendsState {
   @override
   List<Object?> get props => [error];
 }
+
+class GettingUserFriendsInfo extends FriendsState {
+  @override
+  List<Object?> get props => [];
+}
+
+class GettingUserFriendsInfoSucceeded extends FriendsState {
+  @override
+  List<Object?> get props => [];
+}
+
+class GettingUserFriendsInfoFailed extends FriendsState {
+  GettingUserFriendsInfoFailed(this.error);
+
+  final String error;
+
+  @override
+  List<Object?> get props => [error];
+}

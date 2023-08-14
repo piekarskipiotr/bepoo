@@ -62,7 +62,7 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.friends,
         builder: (context, state) => BlocProvider.value(
-          value: getIt<FriendsCubit>(),
+          value: getIt<FriendsCubit>()..fetchUserFriendsInfo(),
           child: const FriendsPage(),
         ),
       ),

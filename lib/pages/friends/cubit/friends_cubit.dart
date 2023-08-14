@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -19,6 +20,8 @@ class FriendsCubit extends Cubit<FriendsState> {
   ) : super(ReturningSearchData());
 
   final usersList = List<UserData>.empty(growable: true);
+  final requestUsersList = List<UserData>.empty(growable: true);
+  final friendUsersList = List<UserData>.empty(growable: true);
   final FirestoreFriendsRepository _friendsRepository;
   final FirestoreUsersRepository _usersRepository;
   final AuthRepository _authRepository;
@@ -27,7 +30,7 @@ class FriendsCubit extends Cubit<FriendsState> {
   String? _name;
   DocumentSnapshot? _lastDocSnap;
 
-  Future<dynamic> search(String? name) async {
+  Future<void> search(String? name) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 250), () async {
       try {
@@ -64,7 +67,7 @@ class FriendsCubit extends Cubit<FriendsState> {
     });
   }
 
-  Future<dynamic> fetchNextPage(RefreshController refreshController) async {
+  Future<void> fetchNextPage(RefreshController refreshController) async {
     try {
       if (_name == null || _lastDocSnap == null) {
         refreshController.loadComplete();
@@ -97,6 +100,42 @@ class FriendsCubit extends Cubit<FriendsState> {
     } catch (e) {
       emit(FetchingNextPageFailed(e.toString()));
       refreshController.loadFailed();
+    }
+  }
+
+  Future<void> fetchUserFriendsInfo({
+    RefreshController? refreshController,
+  }) async {
+    try {
+      emit(GettingUserFriendsInfo());
+      final currentUser = _authRepository.getCurrentUser();
+      if (currentUser == null) throw Exception('user-not-sign-in');
+      final friendsInfo = await _friendsRepository.getUserFriendsInfo(
+        userId: currentUser.uid,
+      );
+
+      requestUsersList
+        ..clear()
+        ..addAll(
+          friendsInfo?.receivedRequests
+                  .map((e) => e.values.first as UserData)
+                  .toList() ??
+              [],
+        );
+
+      friendUsersList
+        ..clear()
+        ..addAll(
+          friendsInfo?.friends
+                  .map((e) => e.values.first as UserData)
+                  .toList() ??
+              [],
+        );
+
+      emit(GettingUserFriendsInfoSucceeded());
+    } catch (e) {
+      refreshController?.refreshFailed();
+      emit(GettingUserFriendsInfoFailed(e.toString()));
     }
   }
 

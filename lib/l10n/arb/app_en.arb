@@ -56,5 +56,8 @@
     "awaiting_for_accept": "Awaiting",
     "accept": "Accept",
     "decline": "Decline",
-    "cannot_load_the_image": "Cannot load the image :("
+    "cannot_load_the_image": "Cannot load the image :(",
+    "search": "Search",
+    "requests": "Requests",
+    "all_friends": "All friends"
 }

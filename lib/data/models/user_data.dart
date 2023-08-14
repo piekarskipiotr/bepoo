@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pooapp/data/models/user_friends_info.dart';
 
@@ -33,4 +34,12 @@ class UserData with _$UserData {
 
   factory UserData.fromJson(Map<String, Object?> json) =>
       _$UserDataFromJson(json);
+
+  factory UserData.fromAuthUser(User user) =>UserData.def(
+    id: user.uid,
+    name: user.displayName!,
+    avatarUrl: user.photoURL,
+    createdAt: user.metadata.creationTime!,
+    updatedAt: null,
+  );
 }

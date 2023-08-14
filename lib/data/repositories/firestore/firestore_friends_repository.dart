@@ -29,12 +29,12 @@ class FirestoreFriendsRepository {
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
           'sentRequests': FieldValue.arrayUnion([
-            {targetUser.id: true},
+            {targetUser.id: targetUser.toJson()},
           ]),
         }),
         _firestore.doc(targetUser.id).update({
           'receivedRequests': FieldValue.arrayUnion([
-            {currentUser.uid: true},
+            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
           ]),
         }),
       ]);
@@ -51,12 +51,12 @@ class FirestoreFriendsRepository {
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
           'sentRequests': FieldValue.arrayRemove([
-            {targetUser.id: true},
+            {targetUser.id: targetUser.toJson()},
           ]),
         }),
         _firestore.doc(targetUser.id).update({
           'receivedRequests': FieldValue.arrayRemove([
-            {currentUser.uid: true},
+            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
           ]),
         }),
       ]);
@@ -73,12 +73,12 @@ class FirestoreFriendsRepository {
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
           'receivedRequests': FieldValue.arrayRemove([
-            {targetUser.id: true},
+            {targetUser.id: targetUser.toJson()},
           ]),
         }),
         _firestore.doc(targetUser.id).update({
           'sentRequests': FieldValue.arrayRemove([
-            {currentUser.uid: true},
+            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
           ]),
         }),
       ]);
@@ -95,12 +95,12 @@ class FirestoreFriendsRepository {
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
           'friends': FieldValue.arrayRemove([
-            {targetUser.id: true},
+            {targetUser.id: targetUser.toJson()},
           ]),
         }),
         _firestore.doc(targetUser.id).update({
           'friends': FieldValue.arrayRemove([
-            {currentUser.uid: true},
+            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
           ]),
         }),
       ]);
@@ -116,15 +116,16 @@ class FirestoreFriendsRepository {
     try {
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
-          'friends.${targetUser.id}': true,
+          'friends.${targetUser.id}': targetUser.toJson(),
           'receivedRequests': FieldValue.arrayRemove([
-            {targetUser.id: true},
+            {targetUser.id: targetUser.toJson()},
           ]),
         }),
         _firestore.doc(targetUser.id).update({
-          'friends.${currentUser.uid}': true,
+          'friends.${currentUser.uid}':
+              UserData.fromAuthUser(currentUser).toJson(),
           'sentRequests': FieldValue.arrayRemove([
-            {currentUser.uid: true},
+            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
           ]),
         }),
       ]);
