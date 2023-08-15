@@ -40,6 +40,7 @@ class AppBarIcon extends StatelessWidget {
                     height: 40,
                     child: Image.network(
                       icon as String? ?? '',
+                      fit: BoxFit.cover,
                       errorBuilder: (context, _, e) => Image.asset(
                         AppIcons.appIcon,
                       ),

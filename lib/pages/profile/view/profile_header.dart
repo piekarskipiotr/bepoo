@@ -1,6 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:pooapp/helpers/app_action_sheet_source.dart';
+import 'package:pooapp/helpers/app_camera.dart';
+import 'package:pooapp/pages/profile/bloc/profile_bloc.dart';
+import 'package:pooapp/pages/profile/view/selected_avatar_bottom_sheet_dialog.dart';
 import 'package:pooapp/resources/resources.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -40,9 +46,24 @@ class ProfileHeader extends StatelessWidget {
               width: 32,
               height: 32,
               child: RawMaterialButton(
-                onPressed: () {
-                  // TODO: implement changing user avatar
-                },
+                onPressed: () => AppActionSheetSource.show(
+                  context: context,
+                  onCameraPressed: () => AppCamera.takePicture(
+                    context: context,
+                    preferredCameraDevice: CameraDevice.front,
+                  ).then((image) {
+                    if (image != null) {
+                      _showSelectedAvatarBottomDialog(context, image);
+                    }
+                  }),
+                  onGalleryPressed: () => AppCamera.openGallery(
+                    context: context,
+                  ).then((image) {
+                    if (image != null) {
+                      _showSelectedAvatarBottomDialog(context, image);
+                    }
+                  }),
+                ),
                 fillColor: Colors.black,
                 shape: const CircleBorder(),
                 child: const Icon(
@@ -63,6 +84,18 @@ class ProfileHeader extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _showSelectedAvatarBottomDialog(BuildContext context, XFile image) {
+    showModalBottomSheet<dynamic>(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      builder: (_) => BlocProvider.value(
+        value: context.read<ProfileBloc>(),
+        child: SelectedAvatarBottomSheetDialog(image: image),
+      ),
     );
   }
 }

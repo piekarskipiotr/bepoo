@@ -26,3 +26,22 @@ class FetchingPoostsFailed extends ProfileState {
   @override
   List<Object?> get props => [error];
 }
+
+class SavingAvatar extends ProfileState {
+  @override
+  List<Object?> get props => [];
+}
+
+class SavingAvatarSucceeded extends ProfileState {
+  @override
+  List<Object?> get props => [];
+}
+
+class SavingAvatarFailed extends ProfileState {
+  SavingAvatarFailed(this.error);
+
+  final String error;
+
+  @override
+  List<Object?> get props => [error];
+}

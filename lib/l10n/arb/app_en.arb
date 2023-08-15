@@ -62,5 +62,9 @@
     "all_friends": "All friends",
     "comments": "Comments",
     "add_comment": "Add comment",
-    "comment_hint": "Type your comment..."
+    "comment_hint": "Type your comment...",
+    "open_camera": "Open camera",
+    "open_gallery": "Open gallery",
+    "save": "Save",
+    "selected_avatar_title": "Your new avatar would present like that 🤩"
 }
