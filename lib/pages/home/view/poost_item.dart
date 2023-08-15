@@ -106,7 +106,7 @@ class _PoostItemState extends State<PoostItem> {
                   ],
                   const SizedBox(height: 16),
                   if (_poost.newestComment?.isNotEmpty ?? false) ...[
-                    GestureDetector(
+                    InkWell(
                       onTap: () => showModalBottomSheet<dynamic>(
                         context: context,
                         showDragHandle: true,
@@ -153,7 +153,7 @@ class _PoostItemState extends State<PoostItem> {
                       ),
                     ),
                   ] else ...[
-                    GestureDetector(
+                    InkWell(
                       onTap: () => showModalBottomSheet<dynamic>(
                         context: context,
                         showDragHandle: true,
