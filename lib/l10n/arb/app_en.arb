@@ -59,5 +59,8 @@
     "cannot_load_the_image": "Cannot load the image :(",
     "search": "Search",
     "requests": "Requests",
-    "all_friends": "All friends"
+    "all_friends": "All friends",
+    "comments": "Comments",
+    "add_comment": "Add comment",
+    "comment_hint": "Type your comment..."
 }

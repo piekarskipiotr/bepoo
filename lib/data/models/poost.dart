@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pooapp/data/enums/poop_type.dart';
-import 'package:pooapp/data/models/comment.dart';
 import 'package:pooapp/data/models/user_data.dart';
 import 'package:uuid/uuid.dart';
 
@@ -25,7 +24,6 @@ class Poost with _$Poost {
       description: description,
       createdAt: DateTime.now(),
       updatedAt: null,
-      comments: <Comment>[],
     );
   }
 
@@ -37,7 +35,8 @@ class Poost with _$Poost {
     required String? description,
     required DateTime createdAt,
     required DateTime? updatedAt,
-    required List<Comment> comments,
+    String? newestComment,
+    String? newestCommentUserName,
     // ignore: invalid_annotation_target
     @JsonKey(includeToJson: false, includeFromJson: false) UserData? userData,
   }) = _Poost;

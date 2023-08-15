@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pooapp/data/app_hive.dart';
+import 'package:pooapp/data/models/comment.dart';
 import 'package:pooapp/data/models/poost.dart';
 
 @lazySingleton
@@ -16,6 +17,26 @@ class FirestorePoostsRepository {
     try {
       await _firestore.doc(docId).set(poost.toJson());
       await poostsBox.put(poost.id, poost.toJson());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<dynamic> updatePoostComment({
+    required String poostId,
+    required Comment comment,
+  }) async {
+    try {
+      final querySnapshot =
+          await _firestore.where('id', isEqualTo: poostId).get();
+
+      for (final docSnapshot in querySnapshot.docs) {
+        final docRef = docSnapshot.reference;
+        await docRef.update({
+          'newestComment': comment.content,
+          'newestCommentUserName': comment.userData?.name,
+        });
+      }
     } catch (e) {
       throw Exception(e.toString());
     }

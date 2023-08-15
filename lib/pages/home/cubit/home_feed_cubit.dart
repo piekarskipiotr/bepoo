@@ -76,7 +76,11 @@ class HomeFeedCubit extends Cubit<HomeFeedState> {
       }
 
       emit(FetchingNextPage());
-      final fetchResults = await _poostsRepository.fetchPoosts(_usersId);
+      final fetchResults = await _poostsRepository.fetchNext(
+        _usersId,
+        _lastDocSnap!,
+      );
+
       final poosts = fetchResults.$1;
       final lastDocumentSnapshot = fetchResults.$2;
       for (final poost in poosts ?? <Poost>[]) {

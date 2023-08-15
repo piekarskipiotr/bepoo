@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pooapp/data/enums/poop_type.dart';
 import 'package:pooapp/data/models/poost.dart';
 import 'package:pooapp/data/models/user_data.dart';
+import 'package:pooapp/di/get_it.dart';
 import 'package:pooapp/l10n/l10n.dart';
+import 'package:pooapp/pages/home/cubit/comments_cubit.dart';
+import 'package:pooapp/pages/home/view/comments_bottom_dialog.dart';
 import 'package:pooapp/resources/resources.dart';
 import 'package:pooapp/widgets/buttons/outlined_action_button.dart';
 
@@ -29,6 +33,8 @@ class _PoostItemState extends State<PoostItem> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Container(
@@ -44,6 +50,7 @@ class _PoostItemState extends State<PoostItem> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,6 +102,80 @@ class _PoostItemState extends State<PoostItem> {
                     Text(
                       _poost.description!,
                       style: GoogleFonts.inter(),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                  if (_poost.newestComment?.isNotEmpty ?? false) ...[
+                    GestureDetector(
+                      onTap: () => showModalBottomSheet<dynamic>(
+                        context: context,
+                        showDragHandle: true,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        builder: (context) => BlocProvider(
+                          create: (_) => getIt<CommentsCubit>()
+                            ..fetchComments(
+                              poostId: _poost.id,
+                            ),
+                          child: CommentsBottomDialog(poostId: _poost.id),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.comments,
+                              style: GoogleFonts.inter(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Opacity(
+                                  opacity: 0.8,
+                                  child: Text(
+                                    '${_poost.newestCommentUserName ?? 'User'}: ',
+                                    style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  _poost.newestComment ?? '',
+                                  style: GoogleFonts.inter(),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ] else ...[
+                    GestureDetector(
+                      onTap: () => showModalBottomSheet<dynamic>(
+                        context: context,
+                        showDragHandle: true,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        builder: (context) => BlocProvider(
+                          create: (_) => getIt<CommentsCubit>()
+                            ..fetchComments(
+                              poostId: _poost.id,
+                            ),
+                          child: CommentsBottomDialog(poostId: _poost.id),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Text(
+                          l10n.add_comment,
+                          style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ],
