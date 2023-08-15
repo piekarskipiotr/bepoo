@@ -66,5 +66,8 @@
     "open_camera": "Open camera",
     "open_gallery": "Open gallery",
     "save": "Save",
-    "selected_avatar_title": "Your new avatar would present like that 🤩"
+    "selected_avatar_title": "Your new avatar would present like that 🤩",
+    "settings": "Settings",
+    "log_out": "Log out",
+    "delete_account": "Delete account"
 }

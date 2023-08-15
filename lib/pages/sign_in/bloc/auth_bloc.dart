@@ -4,13 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pooapp/data/repositories/auth_repository.dart';
+import 'package:pooapp/data/repositories/firestore/firestore_users_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 @lazySingleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc(this._authRepository) : super(UnAuthenticated()) {
+  AuthBloc(
+    this._authRepository,
+    this._usersRepository,
+  ) : super(UnAuthenticated()) {
     on<SigningInWithGoogle>((event, emit) async {
       emit(Authenticating());
       try {
@@ -31,7 +35,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(UnAuthenticated());
       }
     });
-    on<SignOut>((event, emit) async {
+    on<CheckIfUserExists>((event, emit) async {
+      emit(CheckingIfUserExists());
+      try {
+        final user = _authRepository.getCurrentUser();
+        if (user == null) throw Exception('user-not-sign-in');
+        final userData = await _usersRepository.getUserData(
+          user.uid,
+        );
+
+        final doesUserExists = userData != null;
+        emit(CheckingIfUserExistsSucceeded(doesUserExists: doesUserExists));
+      } catch (e) {
+        emit(CheckingIfUserExistsFailed(e.toString()));
+      }
+    });
+    on<LogOut>((event, emit) async {
       emit(LoggingOut());
       await _authRepository.signOut();
       emit(UnAuthenticated());
@@ -43,4 +62,5 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   User? getCurrentUser() => _authRepository.getCurrentUser();
 
   final AuthRepository _authRepository;
+  final FirestoreUsersRepository _usersRepository;
 }

@@ -9,4 +9,6 @@ class SigningInWithGoogle extends AuthEvent {}
 
 class SigningInWithApple extends AuthEvent {}
 
-class SignOut extends AuthEvent {}
+class CheckIfUserExists extends AuthEvent {}
+
+class LogOut extends AuthEvent {}

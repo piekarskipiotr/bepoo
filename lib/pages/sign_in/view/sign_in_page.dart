@@ -23,11 +23,19 @@ class SignInPage extends StatelessWidget {
     return BlocListener(
       bloc: context.read<AuthBloc>(),
       listener: (context, state) {
-        getIt<LoadingOverlayCubit>()
-            .changeLoadingState(isLoading: state is Authenticating);
+        getIt<LoadingOverlayCubit>().changeLoadingState(
+          isLoading: state is Authenticating || state is CheckingIfUserExists,
+        );
 
         if (state is Authenticated) {
-          context.pushReplacement(AppRoutes.userNameSetUp);
+          context.read<AuthBloc>().add(CheckIfUserExists());
+        }
+
+        if (state is CheckingIfUserExistsSucceeded) {
+          final doesUserExists = state.doesUserExists;
+          context.pushReplacement(
+            doesUserExists ? AppRoutes.home : AppRoutes.userNameSetUp,
+          );
         }
       },
       child: Scaffold(

@@ -17,17 +17,16 @@ class FirestoreUsersRepository {
     }
   }
 
-  Future<UserData> getUserData(String userId) async {
+  Future<UserData?> getUserData(String userId) async {
     try {
-      final querySnapshot = await _firestore
-          .where('id', isEqualTo: userId)
-          .get();
+      final querySnapshot =
+          await _firestore.where('id', isEqualTo: userId).get();
 
       final document = querySnapshot.docs;
       final users = document.map((e) => UserData.fromJson(e.data())).toList();
       if (users.length > 1) throw Exception('users-have-identical-ids');
 
-      return users.first;
+      return users.firstOrNull;
     } catch (e) {
       throw Exception(e.toString());
     }

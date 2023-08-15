@@ -8,6 +8,7 @@ import 'package:pooapp/pages/home/view/poost_item.dart';
 import 'package:pooapp/pages/profile/bloc/profile_bloc.dart';
 import 'package:pooapp/pages/profile/view/profile_header.dart';
 import 'package:pooapp/pages/sign_in/bloc/auth_bloc.dart';
+import 'package:pooapp/router/app_routes.dart';
 import 'package:pooapp/widgets/app_bar_icon.dart';
 import 'package:pooapp/widgets/loading_overlay/loading_overlay.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -177,7 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       actions: [
         AppBarIcon(
-          onPressed: () => {},
+          onPressed: () => context.push(AppRoutes.settings),
           icon: Icons.settings,
         ),
       ],
