@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pooapp/data/models/user_data.dart';
 
 part 'user_friends_info.freezed.dart';
 part 'user_friends_info.g.dart';
@@ -8,16 +9,16 @@ part 'user_friends_info.g.dart';
 class UserFriendsInfo with _$UserFriendsInfo {
   factory UserFriendsInfo() {
     return const _UserFriendsInfo(
-      friends: <Map<String, dynamic>>[],
-      sentRequests: <Map<String, dynamic>>[],
-      receivedRequests: <Map<String, dynamic>>[],
+      friends: <Map<String, UserData>>[],
+      sentRequests: <Map<String, UserData>>[],
+      receivedRequests: <Map<String, UserData>>[],
     );
   }
 
   const factory UserFriendsInfo.def({
-    required List<Map<String, dynamic>> friends,
-    required List<Map<String, dynamic>> sentRequests,
-    required List<Map<String, dynamic>> receivedRequests,
+    required List<Map<String, UserData>> friends,
+    required List<Map<String, UserData>> sentRequests,
+    required List<Map<String, UserData>> receivedRequests,
   }) = _UserFriendsInfo;
 
   const UserFriendsInfo._();

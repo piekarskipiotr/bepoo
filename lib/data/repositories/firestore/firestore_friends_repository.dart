@@ -48,16 +48,37 @@ class FirestoreFriendsRepository {
     required UserData targetUser,
   }) async {
     try {
+      final targetUserInfo = await getUserFriendsInfo(userId: targetUser.id);
+      final currentUserInfo = await getUserFriendsInfo(userId: currentUser.uid);
+
+      final targetUserItem = currentUserInfo?.sentRequests
+          .where(
+            (element) => element.keys.firstOrNull == targetUser.id,
+          )
+          .firstOrNull;
+
+      final targetJson = <String, dynamic>{};
+      targetUserItem?.forEach((key, userData) {
+        targetJson[key] = userData.toJson();
+      });
+
+      final currentUserItem = targetUserInfo?.sentRequests
+          .where(
+            (element) => element.keys.firstOrNull == targetUser.id,
+          )
+          .firstOrNull;
+
+      final currentJson = <String, dynamic>{};
+      currentUserItem?.forEach((key, userData) {
+        currentJson[key] = userData.toJson();
+      });
+
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
-          'sentRequests': FieldValue.arrayRemove([
-            {targetUser.id: targetUser.toJson()},
-          ]),
+          'sentRequests': FieldValue.arrayRemove([targetJson]),
         }),
         _firestore.doc(targetUser.id).update({
-          'receivedRequests': FieldValue.arrayRemove([
-            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
-          ]),
+          'receivedRequests': FieldValue.arrayRemove([currentJson]),
         }),
       ]);
     } catch (e) {
@@ -70,16 +91,36 @@ class FirestoreFriendsRepository {
     required UserData targetUser,
   }) async {
     try {
+      final targetUserInfo = await getUserFriendsInfo(userId: targetUser.id);
+      final currentUserInfo = await getUserFriendsInfo(userId: currentUser.uid);
+      final targetUserItem = targetUserInfo?.sentRequests
+          .where(
+            (element) => element.keys.firstOrNull == currentUser.uid,
+          )
+          .firstOrNull;
+
+      final targetJson = <String, dynamic>{};
+      targetUserItem?.forEach((key, userData) {
+        targetJson[key] = userData.toJson();
+      });
+
+      final currentUserItem = currentUserInfo?.receivedRequests
+          .where(
+            (element) => element.keys.firstOrNull == targetUser.id,
+          )
+          .firstOrNull;
+
+      final currentJson = <String, dynamic>{};
+      currentUserItem?.forEach((key, userData) {
+        currentJson[key] = userData.toJson();
+      });
+
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
-          'receivedRequests': FieldValue.arrayRemove([
-            {targetUser.id: targetUser.toJson()},
-          ]),
+          'receivedRequests': FieldValue.arrayRemove([currentUserItem]),
         }),
         _firestore.doc(targetUser.id).update({
-          'sentRequests': FieldValue.arrayRemove([
-            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
-          ]),
+          'sentRequests': FieldValue.arrayRemove([targetJson]),
         }),
       ]);
     } catch (e) {
@@ -92,16 +133,36 @@ class FirestoreFriendsRepository {
     required UserData targetUser,
   }) async {
     try {
+      final targetUserInfo = await getUserFriendsInfo(userId: targetUser.id);
+      final currentUserInfo = await getUserFriendsInfo(userId: currentUser.uid);
+      final targetUserItem = targetUserInfo?.friends
+          .where(
+            (element) => element.keys.firstOrNull == currentUser.uid,
+          )
+          .firstOrNull;
+
+      final targetJson = <String, dynamic>{};
+      targetUserItem?.forEach((key, userData) {
+        targetJson[key] = userData.toJson();
+      });
+
+      final currentUserItem = currentUserInfo?.friends
+          .where(
+            (element) => element.keys.firstOrNull == targetUser.id,
+          )
+          .firstOrNull;
+
+      final currentJson = <String, dynamic>{};
+      currentUserItem?.forEach((key, userData) {
+        currentJson[key] = userData.toJson();
+      });
+
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
-          'friends': FieldValue.arrayRemove([
-            {targetUser.id: targetUser.toJson()},
-          ]),
+          'friends': FieldValue.arrayRemove([currentJson]),
         }),
         _firestore.doc(targetUser.id).update({
-          'friends': FieldValue.arrayRemove([
-            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
-          ]),
+          'friends': FieldValue.arrayRemove([targetJson]),
         }),
       ]);
     } catch (e) {
@@ -114,19 +175,42 @@ class FirestoreFriendsRepository {
     required UserData targetUser,
   }) async {
     try {
+      final targetUserInfo = await getUserFriendsInfo(userId: targetUser.id);
+      final currentUserInfo = await getUserFriendsInfo(userId: currentUser.uid);
+      final targetUserItem = targetUserInfo?.sentRequests
+          .where(
+            (element) => element.keys.firstOrNull == currentUser.uid,
+          )
+          .firstOrNull;
+
+      final targetJson = <String, dynamic>{};
+      targetUserItem?.forEach((key, userData) {
+        targetJson[key] = userData.toJson();
+      });
+
+      final currentUserItem = currentUserInfo?.receivedRequests
+          .where(
+            (element) => element.keys.firstOrNull == targetUser.id,
+          )
+          .firstOrNull;
+
+      final currentJson = <String, dynamic>{};
+      currentUserItem?.forEach((key, userData) {
+        currentJson[key] = userData.toJson();
+      });
+
       await Future.wait([
         _firestore.doc(currentUser.uid).update({
-          'friends.${targetUser.id}': targetUser.toJson(),
-          'receivedRequests': FieldValue.arrayRemove([
+          'friends': FieldValue.arrayUnion([
             {targetUser.id: targetUser.toJson()},
           ]),
+          'receivedRequests': FieldValue.arrayRemove([currentJson]),
         }),
         _firestore.doc(targetUser.id).update({
-          'friends.${currentUser.uid}':
-              UserData.fromAuthUser(currentUser).toJson(),
-          'sentRequests': FieldValue.arrayRemove([
+          'friends': FieldValue.arrayUnion([
             {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
           ]),
+          'sentRequests': FieldValue.arrayRemove([targetJson]),
         }),
       ]);
     } catch (e) {

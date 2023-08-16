@@ -48,7 +48,6 @@ class _FriendsPageState extends State<FriendsPage> {
                         context.read<FriendsCubit>().search(v);
                       },
                       style: GoogleFonts.inter(),
-                      autofocus: true,
                       decoration: InputDecoration(
                         hintText: l10n.search_friends,
                         hintStyle: GoogleFonts.inter(),
@@ -124,22 +123,29 @@ class _FriendsPageState extends State<FriendsPage> {
           child: users.isEmpty
               ? FriendsEmptyList(text: l10n.friends_empty_list)
               : SmartRefresher(
-                controller: _refreshController,
-                enablePullUp: users.length >= 10,
-                enablePullDown: false,
-                onLoading: () => context.read<FriendsCubit>().fetchNextPage(
-                      _refreshController,
-                    ),
-                child: ListView.builder(
-                  itemCount: users.length,
-                  itemBuilder: (context, index) => BlocProvider(
-                    create: (_) => getIt<FriendsItemCubit>(),
-                    child: FriendItem(
-                      user: users[index],
+                  controller: _refreshController,
+                  enablePullUp: users.length >= 10,
+                  enablePullDown: false,
+                  onLoading: () => context.read<FriendsCubit>().fetchNextPage(
+                        _refreshController,
+                      ),
+                  child: ListView.builder(
+                    itemCount: users.length,
+                    itemBuilder: (context, index) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (_) => getIt<FriendsItemCubit>(),
+                        ),
+                        BlocProvider.value(
+                          value: context.read<FriendsCubit>(),
+                        ),
+                      ],
+                      child: FriendItem(
+                        user: users[index],
+                      ),
                     ),
                   ),
                 ),
-              ),
         );
       },
     );
@@ -166,12 +172,24 @@ class _FriendsPageState extends State<FriendsPage> {
               ),
           child: users.isEmpty
               ? FriendsEmptyList(text: l10n.requests_empty_list)
-              : ListView.builder(
-                  itemCount: users.length,
-                  itemBuilder: (context, index) => BlocProvider(
-                    create: (_) => getIt<FriendsItemCubit>(),
-                    child: FriendItem(
-                      user: users[index],
+              : Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: ListView.builder(
+                    primary: false,
+                    itemCount: users.length,
+                    itemBuilder: (context, index) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (_) => getIt<FriendsItemCubit>(),
+                        ),
+                        BlocProvider.value(
+                          value: context.read<FriendsCubit>(),
+                        ),
+                      ],
+                      child: FriendItem(
+                        user: users[index],
+                        hasRequested: true,
+                      ),
                     ),
                   ),
                 ),
@@ -201,12 +219,24 @@ class _FriendsPageState extends State<FriendsPage> {
               ),
           child: users.isEmpty
               ? FriendsEmptyList(text: l10n.all_friends_empty_list)
-              : ListView.builder(
-                  itemCount: users.length,
-                  itemBuilder: (context, index) => BlocProvider(
-                    create: (_) => getIt<FriendsItemCubit>(),
-                    child: FriendItem(
-                      user: users[index],
+              : Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: ListView.builder(
+                    primary: false,
+                    itemCount: users.length,
+                    itemBuilder: (context, index) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (_) => getIt<FriendsItemCubit>(),
+                        ),
+                        BlocProvider.value(
+                          value: context.read<FriendsCubit>(),
+                        ),
+                      ],
+                      child: FriendItem(
+                        user: users[index],
+                        isFriend: true,
+                      ),
                     ),
                   ),
                 ),

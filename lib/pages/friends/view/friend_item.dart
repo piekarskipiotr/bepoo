@@ -3,15 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pooapp/data/models/user_data.dart';
 import 'package:pooapp/l10n/l10n.dart';
+import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
 import 'package:pooapp/pages/friends/cubit/friends_item_cubit.dart';
 import 'package:pooapp/pages/friends/cubit/friends_item_state.dart';
 import 'package:pooapp/resources/resources.dart';
 import 'package:pooapp/widgets/buttons/primary_action_button.dart';
 
 class FriendItem extends StatefulWidget {
-  const FriendItem({required this.user, super.key});
+  const FriendItem({
+    required this.user,
+    this.hasRequested = false,
+    this.isFriend = false,
+    super.key,
+  });
 
   final UserData user;
+  final bool hasRequested;
+  final bool isFriend;
 
   @override
   State<FriendItem> createState() => _FriendItemState();
@@ -25,6 +33,8 @@ class _FriendItemState extends State<FriendItem> {
     super.initState();
     _user = widget.user;
     context.read<FriendsItemCubit>().initializeFriendsInfo(_user);
+    context.read<FriendsItemCubit>().hasRequested = widget.hasRequested;
+    context.read<FriendsItemCubit>().isFriend = widget.isFriend;
   }
 
   @override
@@ -122,18 +132,22 @@ class _FriendItemState extends State<FriendItem> {
             title: l10n.accept,
             textColor: Colors.white,
             backgroundColor: Colors.green,
-            onPressed: () =>
-                context.read<FriendsItemCubit>().acceptFriendRequest(
-                      _user,
-                    ),
+            onPressed: () {
+              context.read<FriendsCubit>().friendUsersList.add(_user);
+              context.read<FriendsItemCubit>().acceptFriendRequest(
+                    _user,
+                  );
+            },
           ),
           const SizedBox(width: 8),
           PrimaryActionButton(
             title: l10n.decline,
-            onPressed: () =>
-                context.read<FriendsItemCubit>().decliningFriendRequest(
-                      _user,
-                    ),
+            onPressed: () {
+              context.read<FriendsCubit>().requestUsersList.remove(_user);
+              context.read<FriendsItemCubit>().decliningFriendRequest(
+                    _user,
+                  );
+            },
           ),
         ],
       );
