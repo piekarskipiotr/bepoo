@@ -69,5 +69,8 @@
     "selected_avatar_title": "Your new avatar would present like that 🤩",
     "settings": "Settings",
     "log_out": "Log out",
-    "delete_account": "Delete account"
+    "delete_account": "Delete account",
+    "friends_empty_list": "Search list is empty",
+    "requests_empty_list": "You don't have any requests.",
+    "all_friends_empty_list": "You don't have any friend :(\nGo to Search section and add some."
 }

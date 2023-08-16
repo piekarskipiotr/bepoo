@@ -6,7 +6,9 @@ import 'package:pooapp/di/get_it.dart';
 import 'package:pooapp/l10n/l10n.dart';
 import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
 import 'package:pooapp/pages/friends/cubit/friends_item_cubit.dart';
+import 'package:pooapp/pages/friends/cubit/friends_state.dart';
 import 'package:pooapp/pages/friends/view/friend_item.dart';
+import 'package:pooapp/pages/friends/view/friends_empty_list.dart';
 import 'package:pooapp/widgets/app_bar_icon.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -105,79 +107,109 @@ class _FriendsPageState extends State<FriendsPage> {
   }
 
   Widget _searchList() {
+    final l10n = context.l10n;
     return BlocBuilder(
       bloc: context.read<FriendsCubit>(),
       builder: (context, state) {
         final users = context.read<FriendsCubit>().usersList;
+        if (state is Searching) {
+          return const Expanded(
+            child: Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          );
+        }
 
         return Expanded(
-          child: SmartRefresher(
-            controller: _refreshController,
-            enablePullUp: users.length >= 10,
-            enablePullDown: false,
-            onLoading: () => context.read<FriendsCubit>().fetchNextPage(
-                  _refreshController,
-                ),
-            child: ListView.builder(
-              itemCount: users.length,
-              itemBuilder: (context, index) => BlocProvider(
-                create: (_) => getIt<FriendsItemCubit>(),
-                child: FriendItem(
-                  user: users[index],
+          child: users.isEmpty
+              ? FriendsEmptyList(text: l10n.friends_empty_list)
+              : SmartRefresher(
+                controller: _refreshController,
+                enablePullUp: users.length >= 10,
+                enablePullDown: false,
+                onLoading: () => context.read<FriendsCubit>().fetchNextPage(
+                      _refreshController,
+                    ),
+                child: ListView.builder(
+                  itemCount: users.length,
+                  itemBuilder: (context, index) => BlocProvider(
+                    create: (_) => getIt<FriendsItemCubit>(),
+                    child: FriendItem(
+                      user: users[index],
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
         );
       },
     );
   }
 
   Widget _requestsList() {
+    final l10n = context.l10n;
     return BlocBuilder(
       bloc: context.read<FriendsCubit>(),
       builder: (context, state) {
         final users = context.read<FriendsCubit>().requestUsersList;
+        if (state is GettingUserFriendsInfo) {
+          return const Expanded(
+            child: Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          );
+        }
 
         return SmartRefresher(
           controller: _requestsRefreshController,
           onRefresh: () => context.read<FriendsCubit>().fetchUserFriendsInfo(
                 refreshController: _requestsRefreshController,
               ),
-          child: ListView.builder(
-            itemCount: users.length,
-            itemBuilder: (context, index) => BlocProvider(
-              create: (_) => getIt<FriendsItemCubit>(),
-              child: FriendItem(
-                user: users[index],
-              ),
-            ),
-          ),
+          child: users.isEmpty
+              ? FriendsEmptyList(text: l10n.requests_empty_list)
+              : ListView.builder(
+                  itemCount: users.length,
+                  itemBuilder: (context, index) => BlocProvider(
+                    create: (_) => getIt<FriendsItemCubit>(),
+                    child: FriendItem(
+                      user: users[index],
+                    ),
+                  ),
+                ),
         );
       },
     );
   }
 
   Widget _allFriendsList() {
+    final l10n = context.l10n;
     return BlocBuilder(
       bloc: context.read<FriendsCubit>(),
       builder: (context, state) {
         final users = context.read<FriendsCubit>().friendUsersList;
+        if (state is GettingUserFriendsInfo) {
+          return const Expanded(
+            child: Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          );
+        }
 
         return SmartRefresher(
           controller: _allFriendsRefreshController,
           onRefresh: () => context.read<FriendsCubit>().fetchUserFriendsInfo(
                 refreshController: _allFriendsRefreshController,
               ),
-          child: ListView.builder(
-            itemCount: users.length,
-            itemBuilder: (context, index) => BlocProvider(
-              create: (_) => getIt<FriendsItemCubit>(),
-              child: FriendItem(
-                user: users[index],
-              ),
-            ),
-          ),
+          child: users.isEmpty
+              ? FriendsEmptyList(text: l10n.all_friends_empty_list)
+              : ListView.builder(
+                  itemCount: users.length,
+                  itemBuilder: (context, index) => BlocProvider(
+                    create: (_) => getIt<FriendsItemCubit>(),
+                    child: FriendItem(
+                      user: users[index],
+                    ),
+                  ),
+                ),
         );
       },
     );
