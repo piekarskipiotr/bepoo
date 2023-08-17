@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:pooapp/data/models/comment.dart';
-import 'package:pooapp/resources/resources.dart';
+import 'package:bepoo/data/models/comment.dart';
+import 'package:bepoo/resources/resources.dart';
 
 class CommentItem extends StatelessWidget {
   const CommentItem({required this.comment, super.key});

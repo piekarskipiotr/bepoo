@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pooapp/data/models/user_data.dart';
+import 'package:bepoo/data/models/user_data.dart';
 import 'package:uuid/uuid.dart';
 
 part 'comment.freezed.dart';

@@ -32,7 +32,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "com.piekarskipiotr.pooapp"
+    namespace "com.piekarskipiotr.bepoo"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -50,7 +50,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.piekarskipiotr.pooapp"
+        applicationId "com.piekarskipiotr.bepoo"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
@@ -80,17 +80,17 @@ android {
         production {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "PooApp"]
+            manifestPlaceholders = [appName: "BePoo"]
         }
         staging {
             dimension "default"
             applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "[STG] PooApp"]
+            manifestPlaceholders = [appName: "[STG] BePoo"]
         }
         development {
             dimension "default"
             applicationIdSuffix ".dev"
-            manifestPlaceholders = [appName: "[DEV] PooApp"]
+            manifestPlaceholders = [appName: "[DEV] BePoo"]
         }
     }
 

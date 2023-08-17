@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/data/models/user_data.dart';
-import 'package:pooapp/l10n/l10n.dart';
-import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
-import 'package:pooapp/pages/friends/cubit/friends_item_cubit.dart';
-import 'package:pooapp/pages/friends/cubit/friends_item_state.dart';
-import 'package:pooapp/resources/resources.dart';
-import 'package:pooapp/widgets/buttons/primary_action_button.dart';
+import 'package:bepoo/data/models/user_data.dart';
+import 'package:bepoo/l10n/l10n.dart';
+import 'package:bepoo/pages/friends/cubit/friends_cubit.dart';
+import 'package:bepoo/pages/friends/cubit/friends_item_cubit.dart';
+import 'package:bepoo/pages/friends/cubit/friends_item_state.dart';
+import 'package:bepoo/resources/resources.dart';
+import 'package:bepoo/widgets/buttons/primary_action_button.dart';
 
 class FriendItem extends StatefulWidget {
   const FriendItem({

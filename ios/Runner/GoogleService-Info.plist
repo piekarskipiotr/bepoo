@@ -13,11 +13,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.piekarskipiotr.pooapp.dev</string>
+	<string>com.piekarskipiotr.bepoo.dev</string>
 	<key>PROJECT_ID</key>
-	<string>pooapp-d70ed</string>
+	<string>bepoo-d70ed</string>
 	<key>STORAGE_BUCKET</key>
-	<string>pooapp-d70ed.appspot.com</string>
+	<string>bepoo-d70ed.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

@@ -1,5 +1,5 @@
-import 'package:pooapp/app/app.dart';
-import 'package:pooapp/bootstrap.dart';
+import 'package:bepoo/app/app.dart';
+import 'package:bepoo/bootstrap.dart';
 
 void main() {
   bootstrap(() => const App());

@@ -1,4 +1,4 @@
-name: pooapp
+name: bepoo
 
 concurrency:
   group: $-$

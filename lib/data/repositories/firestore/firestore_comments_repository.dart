@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pooapp/data/models/comment.dart';
+import 'package:bepoo/data/models/comment.dart';
 
 @lazySingleton
 class FirestoreCommentsRepository {

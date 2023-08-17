@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/resources/resources.dart';
+import 'package:bepoo/resources/resources.dart';
 
 class FriendsEmptyList extends StatelessWidget {
   const FriendsEmptyList({required this.text, super.key});

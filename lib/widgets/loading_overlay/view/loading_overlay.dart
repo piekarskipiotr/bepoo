@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pooapp/di/get_it.dart';
-import 'package:pooapp/widgets/loading_overlay/cubit/loading_overlay_cubit.dart';
-import 'package:pooapp/widgets/loading_overlay/cubit/loading_overlay_state.dart';
+import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/widgets/loading_overlay/cubit/loading_overlay_cubit.dart';
+import 'package:bepoo/widgets/loading_overlay/cubit/loading_overlay_state.dart';
 
 class LoadingOverlay extends StatelessWidget {
   const LoadingOverlay({required this.child, super.key});

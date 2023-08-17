@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/di/get_it.dart';
-import 'package:pooapp/helpers/app_action_dialog.dart';
-import 'package:pooapp/l10n/l10n.dart';
-import 'package:pooapp/pages/poost_creation/bloc/poost_creation_bloc.dart';
-import 'package:pooapp/pages/poost_creation/view/poop_type_selection.dart';
-import 'package:pooapp/pages/poost_creation/view/poost_description.dart';
-import 'package:pooapp/pages/poost_creation/view/poost_image_selection.dart';
-import 'package:pooapp/widgets/app_bar_icon.dart';
-import 'package:pooapp/widgets/buttons/primary_button.dart';
-import 'package:pooapp/widgets/loading_overlay/loading_overlay.dart';
-import 'package:pooapp/widgets/snackbars/error_snack_bar.dart';
+import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/helpers/app_action_dialog.dart';
+import 'package:bepoo/l10n/l10n.dart';
+import 'package:bepoo/pages/poost_creation/bloc/poost_creation_bloc.dart';
+import 'package:bepoo/pages/poost_creation/view/poop_type_selection.dart';
+import 'package:bepoo/pages/poost_creation/view/poost_description.dart';
+import 'package:bepoo/pages/poost_creation/view/poost_image_selection.dart';
+import 'package:bepoo/widgets/app_bar_icon.dart';
+import 'package:bepoo/widgets/buttons/primary_button.dart';
+import 'package:bepoo/widgets/loading_overlay/loading_overlay.dart';
+import 'package:bepoo/widgets/snackbars/error_snack_bar.dart';
 
 class PoostCreationPage extends StatefulWidget {
   const PoostCreationPage({super.key});

@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/data/enums/sign_in_method.dart';
-import 'package:pooapp/di/get_it.dart';
-import 'package:pooapp/l10n/l10n.dart';
-import 'package:pooapp/pages/sign_in/bloc/auth_bloc.dart';
-import 'package:pooapp/resources/resources.dart';
-import 'package:pooapp/router/app_routes.dart';
-import 'package:pooapp/widgets/buttons/sign_in_button.dart';
-import 'package:pooapp/widgets/loading_overlay/loading_overlay.dart';
+import 'package:bepoo/data/enums/sign_in_method.dart';
+import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/l10n/l10n.dart';
+import 'package:bepoo/pages/sign_in/bloc/auth_bloc.dart';
+import 'package:bepoo/resources/resources.dart';
+import 'package:bepoo/router/app_routes.dart';
+import 'package:bepoo/widgets/buttons/sign_in_button.dart';
+import 'package:bepoo/widgets/loading_overlay/loading_overlay.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});

@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pooapp/data/models/user_data.dart';
-import 'package:pooapp/data/repositories/auth_repository.dart';
-import 'package:pooapp/data/repositories/firestore/firestore_friends_repository.dart';
-import 'package:pooapp/data/repositories/firestore/firestore_users_repository.dart';
-import 'package:pooapp/pages/user_name_set_up/cubit/user_name_set_up_state.dart';
+import 'package:bepoo/data/models/user_data.dart';
+import 'package:bepoo/data/repositories/auth_repository.dart';
+import 'package:bepoo/data/repositories/firestore/firestore_friends_repository.dart';
+import 'package:bepoo/data/repositories/firestore/firestore_users_repository.dart';
+import 'package:bepoo/pages/user_name_set_up/cubit/user_name_set_up_state.dart';
 
 @lazySingleton
 class UserNameSetUpCubit extends Cubit<UserNameSetUpState> {

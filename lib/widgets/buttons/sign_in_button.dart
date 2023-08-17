@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/data/enums/sign_in_method.dart';
-import 'package:pooapp/l10n/l10n.dart';
+import 'package:bepoo/data/enums/sign_in_method.dart';
+import 'package:bepoo/l10n/l10n.dart';
 
 class SignInButton extends StatelessWidget {
   const SignInButton({

@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:pooapp/widgets/action_dialogs/android_action_dialog.dart';
-import 'package:pooapp/widgets/action_dialogs/ios_action_dialog.dart';
+import 'package:bepoo/widgets/action_dialogs/android_action_dialog.dart';
+import 'package:bepoo/widgets/action_dialogs/ios_action_dialog.dart';
 
 class AppActionDialog {
   static void show({

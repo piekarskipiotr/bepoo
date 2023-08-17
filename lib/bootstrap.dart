@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pooapp/data/app_hive.dart';
-import 'package:pooapp/di/get_it.dart';
+import 'package:bepoo/data/app_hive.dart';
+import 'package:bepoo/di/get_it.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();

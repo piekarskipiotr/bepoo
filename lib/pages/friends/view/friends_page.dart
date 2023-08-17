@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/di/get_it.dart';
-import 'package:pooapp/l10n/l10n.dart';
-import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
-import 'package:pooapp/pages/friends/cubit/friends_item_cubit.dart';
-import 'package:pooapp/pages/friends/cubit/friends_state.dart';
-import 'package:pooapp/pages/friends/view/friend_item.dart';
-import 'package:pooapp/pages/friends/view/friends_empty_list.dart';
-import 'package:pooapp/widgets/app_bar_icon.dart';
+import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/l10n/l10n.dart';
+import 'package:bepoo/pages/friends/cubit/friends_cubit.dart';
+import 'package:bepoo/pages/friends/cubit/friends_item_cubit.dart';
+import 'package:bepoo/pages/friends/cubit/friends_state.dart';
+import 'package:bepoo/pages/friends/view/friend_item.dart';
+import 'package:bepoo/pages/friends/view/friends_empty_list.dart';
+import 'package:bepoo/widgets/app_bar_icon.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class FriendsPage extends StatefulWidget {

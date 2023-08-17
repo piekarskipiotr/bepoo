@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pooapp/data/models/user_data.dart';
-import 'package:pooapp/data/models/user_friends_info.dart';
+import 'package:bepoo/data/models/user_data.dart';
+import 'package:bepoo/data/models/user_friends_info.dart';
 
 @lazySingleton
 class FirestoreFriendsRepository {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/l10n/l10n.dart';
-import 'package:pooapp/pages/poost_creation/bloc/poost_creation_bloc.dart';
+import 'package:bepoo/l10n/l10n.dart';
+import 'package:bepoo/pages/poost_creation/bloc/poost_creation_bloc.dart';
 
 class PoostDescription extends StatefulWidget {
   const PoostDescription({super.key});

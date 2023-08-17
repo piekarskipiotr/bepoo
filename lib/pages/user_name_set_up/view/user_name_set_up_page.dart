@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/di/get_it.dart';
-import 'package:pooapp/l10n/l10n.dart';
-import 'package:pooapp/pages/user_name_set_up/cubit/user_name_set_up_cubit.dart';
-import 'package:pooapp/pages/user_name_set_up/cubit/user_name_set_up_state.dart';
-import 'package:pooapp/router/app_routes.dart';
-import 'package:pooapp/widgets/buttons/primary_button.dart';
-import 'package:pooapp/widgets/loading_overlay/loading_overlay.dart';
-import 'package:pooapp/widgets/snackbars/error_snack_bar.dart';
+import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/l10n/l10n.dart';
+import 'package:bepoo/pages/user_name_set_up/cubit/user_name_set_up_cubit.dart';
+import 'package:bepoo/pages/user_name_set_up/cubit/user_name_set_up_state.dart';
+import 'package:bepoo/router/app_routes.dart';
+import 'package:bepoo/widgets/buttons/primary_button.dart';
+import 'package:bepoo/widgets/loading_overlay/loading_overlay.dart';
+import 'package:bepoo/widgets/snackbars/error_snack_bar.dart';
 
 class UserNameSetUpPage extends StatelessWidget {
   const UserNameSetUpPage({required this.formKey, super.key});

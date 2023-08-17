@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:pooapp/data/enums/app_permission.dart';
-import 'package:pooapp/l10n/l10n.dart';
+import 'package:bepoo/data/enums/app_permission.dart';
+import 'package:bepoo/l10n/l10n.dart';
 
 class PermissionRationalePage extends StatelessWidget {
   const PermissionRationalePage({required this.appPermission, super.key});

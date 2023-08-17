@@ -1,4 +1,4 @@
-package com.piekarskipiotr.pooapp
+package com.piekarskipiotr.bepoo
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pooapp/data/enums/app_permission.dart';
-import 'package:pooapp/di/get_it.dart';
-import 'package:pooapp/pages/friends/cubit/friends_cubit.dart';
-import 'package:pooapp/pages/friends/friends.dart';
-import 'package:pooapp/pages/home/cubit/home_feed_cubit.dart';
-import 'package:pooapp/pages/home/home.dart';
-import 'package:pooapp/pages/permission_rationale/permission_rationale.dart';
-import 'package:pooapp/pages/profile/bloc/profile_bloc.dart';
-import 'package:pooapp/pages/profile/profile.dart';
-import 'package:pooapp/pages/settings/settings.dart';
-import 'package:pooapp/pages/sign_in/sign_in.dart';
-import 'package:pooapp/pages/user_name_set_up/user_name_set_up.dart';
-import 'package:pooapp/router/app_routes.dart';
+import 'package:bepoo/data/enums/app_permission.dart';
+import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/pages/friends/cubit/friends_cubit.dart';
+import 'package:bepoo/pages/friends/friends.dart';
+import 'package:bepoo/pages/home/cubit/home_feed_cubit.dart';
+import 'package:bepoo/pages/home/home.dart';
+import 'package:bepoo/pages/permission_rationale/permission_rationale.dart';
+import 'package:bepoo/pages/profile/bloc/profile_bloc.dart';
+import 'package:bepoo/pages/profile/profile.dart';
+import 'package:bepoo/pages/settings/settings.dart';
+import 'package:bepoo/pages/sign_in/sign_in.dart';
+import 'package:bepoo/pages/user_name_set_up/user_name_set_up.dart';
+import 'package:bepoo/router/app_routes.dart';
 
 class AppRouter {
   static final instance = GoRouter(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pooapp/pages/home/cubit/home_feed_cubit.dart';
-import 'package:pooapp/pages/home/cubit/home_feed_state.dart';
-import 'package:pooapp/pages/home/view/home_empty_feed.dart';
-import 'package:pooapp/pages/home/view/poost_item.dart';
+import 'package:bepoo/pages/home/cubit/home_feed_cubit.dart';
+import 'package:bepoo/pages/home/cubit/home_feed_state.dart';
+import 'package:bepoo/pages/home/view/home_empty_feed.dart';
+import 'package:bepoo/pages/home/view/poost_item.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeFeed extends StatefulWidget {

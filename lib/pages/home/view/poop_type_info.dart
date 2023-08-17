@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/data/enums/poop_type.dart';
-import 'package:pooapp/widgets/buttons/outlined_action_button.dart';
+import 'package:bepoo/data/enums/poop_type.dart';
+import 'package:bepoo/widgets/buttons/outlined_action_button.dart';
 
 class PoopTypeInfo extends StatefulWidget {
   const PoopTypeInfo({required this.poopType, super.key});

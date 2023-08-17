@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:pooapp/data/enums/app_permission.dart';
-import 'package:pooapp/router/app_routes.dart';
+import 'package:bepoo/data/enums/app_permission.dart';
+import 'package:bepoo/router/app_routes.dart';
 
 class PermissionHelper {
   static Future<bool> _isAndroid13orHigher() async {

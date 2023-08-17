@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/di/get_it.dart';
-import 'package:pooapp/l10n/l10n.dart';
-import 'package:pooapp/pages/home/cubit/home_feed_cubit.dart';
-import 'package:pooapp/pages/home/view/home_feed.dart';
-import 'package:pooapp/pages/poost_creation/bloc/poost_creation_bloc.dart';
-import 'package:pooapp/pages/poost_creation/poost_creation.dart';
-import 'package:pooapp/pages/sign_in/bloc/auth_bloc.dart';
-import 'package:pooapp/router/app_routes.dart';
-import 'package:pooapp/widgets/app_bar_icon.dart';
+import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/l10n/l10n.dart';
+import 'package:bepoo/pages/home/cubit/home_feed_cubit.dart';
+import 'package:bepoo/pages/home/view/home_feed.dart';
+import 'package:bepoo/pages/poost_creation/bloc/poost_creation_bloc.dart';
+import 'package:bepoo/pages/poost_creation/poost_creation.dart';
+import 'package:bepoo/pages/sign_in/bloc/auth_bloc.dart';
+import 'package:bepoo/router/app_routes.dart';
+import 'package:bepoo/widgets/app_bar_icon.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
         surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: true,
         title: Text(
-          'PooApp',
+          'BePoo',
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w900,
           ),

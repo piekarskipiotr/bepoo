@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pooapp/resources/resources.dart';
-import 'package:pooapp/themes/app_theme.dart';
+import 'package:bepoo/resources/resources.dart';
+import 'package:bepoo/themes/app_theme.dart';
 
 class AppBarIcon extends StatelessWidget {
   const AppBarIcon({

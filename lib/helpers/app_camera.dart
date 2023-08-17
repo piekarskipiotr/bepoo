@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:pooapp/helpers/permission_helper.dart';
+import 'package:bepoo/helpers/permission_helper.dart';
 
 class AppCamera {
   static Future<bool> _checkCameraPermission(BuildContext context) async {

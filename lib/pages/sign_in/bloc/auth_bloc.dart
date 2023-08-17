@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pooapp/data/repositories/auth_repository.dart';
-import 'package:pooapp/data/repositories/firestore/firestore_users_repository.dart';
+import 'package:bepoo/data/repositories/auth_repository.dart';
+import 'package:bepoo/data/repositories/firestore/firestore_users_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

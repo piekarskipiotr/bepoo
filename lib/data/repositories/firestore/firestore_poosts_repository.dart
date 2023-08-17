@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pooapp/data/app_hive.dart';
-import 'package:pooapp/data/models/comment.dart';
-import 'package:pooapp/data/models/poost.dart';
+import 'package:bepoo/data/app_hive.dart';
+import 'package:bepoo/data/models/comment.dart';
+import 'package:bepoo/data/models/poost.dart';
 
 @lazySingleton
 class FirestorePoostsRepository {
