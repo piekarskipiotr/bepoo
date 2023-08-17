@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pooapp/data/enums/poop_type.dart';
 import 'package:pooapp/data/models/poost.dart';
 import 'package:pooapp/data/models/user_data.dart';
 import 'package:pooapp/di/get_it.dart';
 import 'package:pooapp/l10n/l10n.dart';
 import 'package:pooapp/pages/home/cubit/comments_cubit.dart';
 import 'package:pooapp/pages/home/view/comments_bottom_dialog.dart';
+import 'package:pooapp/pages/home/view/poop_type_info.dart';
 import 'package:pooapp/resources/resources.dart';
-import 'package:pooapp/widgets/buttons/outlined_action_button.dart';
 
 class PoostItem extends StatefulWidget {
   const PoostItem({required this.poost, super.key});
@@ -217,7 +216,8 @@ class _PoostItemState extends State<PoostItem> {
                   ),
                 ),
               ),
-              _poopTypeInfo(),
+              _overlay(),
+              PoopTypeInfo(poopType: _poost.poopType),
             ],
           ),
         ),
@@ -225,38 +225,17 @@ class _PoostItemState extends State<PoostItem> {
     );
   }
 
-  Widget _poopTypeInfo() {
-    final poopType = _poost.poopType;
-    return Container(
-      padding: const EdgeInsets.only(
-        left: 16,
-        bottom: 16,
-        right: 72,
-      ),
-      alignment: Alignment.bottomLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          OutlinedActionButton(
-            onPressed: () {},
-            title: '${poopType.emoji} ${poopType.getName(context)}',
-            textColor: Colors.white,
-            borderColor: Colors.white,
+  Widget _overlay() => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [
+              Colors.black.withOpacity(.7),
+              Colors.transparent,
+            ],
           ),
-          const SizedBox(height: 4),
-          Padding(
-            padding: const EdgeInsets.only(left: 4),
-            child: Text(
-              _poost.poopType.getDescription(context),
-              style: GoogleFonts.inter(
-                fontSize: 12,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 }
