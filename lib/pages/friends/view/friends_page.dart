@@ -97,7 +97,19 @@ class _FriendsPageState extends State<FriendsPage> {
           labelStyle: GoogleFonts.inter(),
           tabs: [
             Tab(text: l10n.search),
-            Tab(text: l10n.requests),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (context
+                    .read<FriendsCubit>()
+                    .requestUsersList
+                    .isNotEmpty) ...[
+                  const Icon(Icons.circle, size: 8, color: Colors.deepOrange),
+                  const SizedBox(width: 8),
+                ],
+                Tab(text: l10n.requests),
+              ],
+            ),
             Tab(text: l10n.all_friends),
           ],
         ),
