@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pooapp/pages/home/cubit/home_feed_cubit.dart';
+import 'package:pooapp/pages/home/cubit/home_feed_state.dart';
 import 'package:pooapp/pages/home/view/home_empty_feed.dart';
 import 'package:pooapp/pages/home/view/poost_item.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -27,6 +28,11 @@ class _HomeFeedState extends State<HomeFeed> {
       bloc: context.read<HomeFeedCubit>(),
       builder: (context, state) {
         final poosts = context.read<HomeFeedCubit>().poostsList;
+        if (state is FetchingPoosts && poosts.isEmpty) {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
 
         return SmartRefresher(
           controller: _refreshController,
