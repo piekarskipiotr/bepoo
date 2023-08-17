@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>636542386317-gfv6rbu8aeccqg9fsbt2c0eapgo83btc.apps.googleusercontent.com</string>
+	<string>636542386317-a421hhbtckao42aeqsum0epvc6t4tluk.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.636542386317-gfv6rbu8aeccqg9fsbt2c0eapgo83btc</string>
+	<string>com.googleusercontent.apps.636542386317-a421hhbtckao42aeqsum0epvc6t4tluk</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBdmLwsli3XaC8rJmXspqs6PQGQB8tzbko</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,11 +13,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.piekarskipiotr.bepoo.dev</string>
+	<string>com.piekarskipiotr.bepoo</string>
 	<key>PROJECT_ID</key>
-	<string>bepoo-d70ed</string>
+	<string>pooapp-d70ed</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bepoo-d70ed.appspot.com</string>
+	<string>pooapp-d70ed.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:636542386317:ios:1664894f397bafeb0162c4</string>
+	<string>1:636542386317:ios:ec95b554044f92010162c4</string>
 </dict>
 </plist>
