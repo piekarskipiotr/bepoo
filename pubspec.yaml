@@ -61,3 +61,19 @@ flutter:
   assets:
     - assets/app_icons/
     - assets/sign_in_icons/
+
+spider:
+  generate_tests: true
+  no_comments: true
+  export: true
+  use_part_of: true
+  use_references_list: false
+  package: resources
+  groups:
+    - path: assets/app_icons
+      class_name: AppIcons
+      types: [ .png ]
+
+    - path: assets/sign_in_icons
+      class_name: SignInIcons
+      types: [ .svg ]
