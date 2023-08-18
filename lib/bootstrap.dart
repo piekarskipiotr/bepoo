@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:bepoo/data/app_hive.dart';
+import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/firebase_options.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
-import 'package:bepoo/data/app_hive.dart';
-import 'package:bepoo/di/get_it.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -30,7 +31,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = const AppBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await AppHive.init();
   configureDependencies();
   runApp(await builder());

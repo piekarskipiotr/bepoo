@@ -28,21 +28,21 @@
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>NSCameraUsageDescription</key>
-        <string>We need access to your camera to let you take pictures and add them to your poosts. You can also use the camera to change your avatar and personalize your profile.</string>
-        <key>NSPhotoLibraryUsageDescription</key>
-        <string>We need access to your photo library to let you pick an avatar for your profile. Selecting a photo from your library will help personalize your account and enhance your user experience.</string>
+		<string>We need access to your camera to let you take pictures and add them to your poosts. You can also use the camera to change your avatar and personalize your profile.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>We need access to your photo library to let you pick an avatar for your profile. Selecting a photo from your library will help personalize your account and enhance your user experience.</string>
 		<key>CFBundleURLTypes</key>
-        <array>
-        	<dict>
-        		<key>CFBundleTypeRole</key>
-        		<string>Editor</string>
-        		<key>CFBundleURLSchemes</key>
-        		<array>
-        			<string>com.googleusercontent.apps.636542386317-qaleu7lfv7qhtn2t0l2h27qc50ts3nha</string>
-        			<string>com.googleusercontent.apps.636542386317-a421hhbtckao42aeqsum0epvc6t4tluk</string>
-        		</array>
-        	</dict>
-        </array>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>com.googleusercontent.apps.636542386317-qaleu7lfv7qhtn2t0l2h27qc50ts3nha</string>
+					<string>com.googleusercontent.apps.636542386317-a421hhbtckao42aeqsum0epvc6t4tluk</string>
+				</array>
+			</dict>
+		</array>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>UILaunchStoryboardName</key>
