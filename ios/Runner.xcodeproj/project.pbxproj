@@ -16,6 +16,7 @@
 		AE08D4852A74378C0065B257 /* LaunchScreenProduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE08D47F2A74378C0065B257 /* LaunchScreenProduction.storyboard */; };
 		AE08D4862A74378C0065B257 /* LaunchScreenDevelopment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE08D4812A74378C0065B257 /* LaunchScreenDevelopment.storyboard */; };
 		AE08D4872A74378C0065B257 /* LaunchScreenStaging.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE08D4832A74378C0065B257 /* LaunchScreenStaging.storyboard */; };
+		AEA0B1D22A8F8DF400A24ABE /* Firebase-config in Resources */ = {isa = PBXBuildFile; fileRef = AEA0B1D12A8F8DF400A24ABE /* Firebase-config */; };
 		AEB2658E2A75090E00A1F304 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB2658D2A75090E00A1F304 /* GoogleService-Info.plist */; };
 		EFB94D72349388CE70A2B98F /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD7D74C6836EF16F9E84872 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		AE08D4802A74378C0065B257 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenProduction.storyboard; sourceTree = "<group>"; };
 		AE08D4822A74378C0065B257 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenDevelopment.storyboard; sourceTree = "<group>"; };
 		AE08D4842A74378C0065B257 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenStaging.storyboard; sourceTree = "<group>"; };
+		AEA0B1D12A8F8DF400A24ABE /* Firebase-config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Firebase-config"; sourceTree = "<group>"; };
 		AEB2658D2A75090E00A1F304 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AEB2658F2A7509C100A1F304 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		B42A4C1F39C25DDC15A1BC59 /* Pods-Runner.debug-production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-production.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-production.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				AEA0B1D12A8F8DF400A24ABE /* Firebase-config */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
@@ -166,6 +169,7 @@
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				638EB7C0C835B047924E8615 /* [CP] Embed Pods Frameworks */,
 				A773DBEA70D571BA868A12CE /* [CP] Copy Pods Resources */,
+				AEA0B1D32A8F8E4500A24ABE /* Copy google serivce info */,
 			);
 			buildRules = (
 			);
@@ -221,6 +225,7 @@
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				AE08D4862A74378C0065B257 /* LaunchScreenDevelopment.storyboard in Resources */,
 				AE08D4852A74378C0065B257 /* LaunchScreenProduction.storyboard in Resources */,
+				AEA0B1D22A8F8DF400A24ABE /* Firebase-config in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +319,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		AEA0B1D32A8F8E4500A24ABE /* Copy google serivce info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy google serivce info";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "environment=\"default\"\n\n# Regex to extract the scheme name from the Build Configuration\n# We have named our Build Configurations as Debug-dev, Debug-prod etc.\n# Here, dev and prod are the scheme names. This kind of naming is required by Flutter for flavors to work.\n# We are using the $CONFIGURATION variable available in the XCode build environment to extract \n# the environment (or flavor)\n# For eg.\n# If CONFIGURATION=\"Debug-prod\", then environment will get set to \"prod\".\nif [[ $CONFIGURATION =~ -([^-]*)$ ]]; then\nenvironment=${BASH_REMATCH[1]}\nfi\n\necho $environment\n\n# Name and path of the resource we're copying\nGOOGLESERVICE_INFO_PLIST=GoogleService-Info.plist\nGOOGLESERVICE_INFO_FILE=${PROJECT_DIR}/Firebase-config/${environment}/${GOOGLESERVICE_INFO_PLIST}\n\n# Make sure GoogleService-Info.plist exists\necho \"Looking for ${GOOGLESERVICE_INFO_PLIST} in ${GOOGLESERVICE_INFO_FILE}\"\nif [ ! -f $GOOGLESERVICE_INFO_FILE ]\nthen\necho \"No GoogleService-Info.plist found. Please ensure it's in the proper directory.\"\nexit 1\nfi\n\n# Get a reference to the destination location for the GoogleService-Info.plist\n# This is the default location where Firebase init code expects to find GoogleServices-Info.plist file\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Will copy ${GOOGLESERVICE_INFO_PLIST} to final destination: ${PLIST_DESTINATION}\"\n\n# Copy over the prod GoogleService-Info.plist for Release builds\ncp \"${GOOGLESERVICE_INFO_FILE}\" \"${PLIST_DESTINATION}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

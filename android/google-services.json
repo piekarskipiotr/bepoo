@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:636542386317:android:9da87e64f42f45a50162c4",
+        "android_client_info": {
+          "package_name": "com.piekarskipiotr.bepoo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636542386317-9ci0k9pck4t32hb0pi7p0evghsmg4ggg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMUQedp3zbVzh99gy4mpt_rS8n2peSVjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636542386317-49rt661fnkdkt2i8ed5egk29fcfict4k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "636542386317-a421hhbtckao42aeqsum0epvc6t4tluk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.piekarskipiotr.bepoo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:636542386317:android:33354ed37aabd5610162c4",
         "android_client_info": {
           "package_name": "com.piekarskipiotr.bepoo.dev"
@@ -31,10 +67,10 @@
               "client_type": 3
             },
             {
-              "client_id": "636542386317-gfv6rbu8aeccqg9fsbt2c0eapgo83btc.apps.googleusercontent.com",
+              "client_id": "636542386317-a421hhbtckao42aeqsum0epvc6t4tluk.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.piekarskipiotr.pooapp.dev"
+                "bundle_id": "com.piekarskipiotr.bepoo"
               }
             }
           ]
