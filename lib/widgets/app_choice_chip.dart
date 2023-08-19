@@ -35,7 +35,7 @@ class AppChoiceChip extends StatelessWidget {
 
 class _CustomChoiceChip extends StatelessWidget
     implements
-        ChipAttributes,
+
         SelectableChipAttributes,
         DisabledChipAttributes {
   const _CustomChoiceChip({
