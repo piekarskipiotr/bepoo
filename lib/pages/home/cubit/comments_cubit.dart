@@ -1,8 +1,5 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:bepoo/data/models/comment.dart';
 import 'package:bepoo/data/models/user_data.dart';
 import 'package:bepoo/data/repositories/auth_repository.dart';
@@ -10,6 +7,9 @@ import 'package:bepoo/data/repositories/firestore/firestore_comments_repository.
 import 'package:bepoo/data/repositories/firestore/firestore_poosts_repository.dart';
 import 'package:bepoo/data/repositories/firestore/firestore_users_repository.dart';
 import 'package:bepoo/pages/home/cubit/comments_state.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 @injectable

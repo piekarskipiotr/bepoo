@@ -1,6 +1,6 @@
+import 'package:bepoo/helpers/error-translator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bepoo/helpers/error-translator.dart';
 
 SnackBar errorSnackbar({required BuildContext context, required String error}) {
   final errorText = ErrorTranslator.translate(

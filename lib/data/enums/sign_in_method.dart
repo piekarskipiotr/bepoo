@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:bepoo/resources/resources.dart';
+import 'package:flutter/material.dart';
 
 enum SignInMethod { google, apple }
 

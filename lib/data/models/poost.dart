@@ -1,6 +1,6 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bepoo/data/enums/poop_type.dart';
 import 'package:bepoo/data/models/user_data.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 part 'poost.freezed.dart';

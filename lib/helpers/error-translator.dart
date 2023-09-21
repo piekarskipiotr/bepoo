@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:bepoo/l10n/l10n.dart';
+import 'package:flutter/material.dart';
 
 class ErrorTranslator {
   static String translate({

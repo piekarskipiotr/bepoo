@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bepoo/data/enums/poop_type.dart';
 import 'package:bepoo/l10n/l10n.dart';
 import 'package:bepoo/pages/poost_creation/bloc/poost_creation_bloc.dart';
 import 'package:bepoo/widgets/app_choice_chip.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PoopTypeSelection extends StatefulWidget {
   const PoopTypeSelection({super.key});

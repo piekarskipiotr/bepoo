@@ -1,13 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:bepoo/helpers/app_action_sheet_source.dart';
 import 'package:bepoo/helpers/app_camera.dart';
 import 'package:bepoo/pages/profile/bloc/profile_bloc.dart';
 import 'package:bepoo/pages/profile/view/selected_avatar_bottom_sheet_dialog.dart';
 import 'package:bepoo/resources/resources.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({required this.user, super.key});

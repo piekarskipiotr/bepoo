@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bepoo/data/models/poost.dart';
 import 'package:bepoo/data/models/user_data.dart';
 import 'package:bepoo/di/get_it.dart';
@@ -9,6 +6,9 @@ import 'package:bepoo/pages/home/cubit/comments_cubit.dart';
 import 'package:bepoo/pages/home/view/comments_bottom_dialog.dart';
 import 'package:bepoo/pages/home/view/poop_type_info.dart';
 import 'package:bepoo/resources/resources.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PoostItem extends StatefulWidget {
   const PoostItem({required this.poost, super.key});

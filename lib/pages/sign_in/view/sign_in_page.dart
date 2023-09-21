@@ -1,9 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bepoo/data/enums/sign_in_method.dart';
 import 'package:bepoo/di/get_it.dart';
 import 'package:bepoo/l10n/l10n.dart';
@@ -12,6 +8,10 @@ import 'package:bepoo/resources/resources.dart';
 import 'package:bepoo/router/app_routes.dart';
 import 'package:bepoo/widgets/buttons/sign_in_button.dart';
 import 'package:bepoo/widgets/loading_overlay/loading_overlay.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -92,7 +92,7 @@ class SignInPage extends StatelessWidget {
                       ),
                     ],
                   ],
-                )
+                ),
               ],
             ),
           ),

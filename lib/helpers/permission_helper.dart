@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:bepoo/data/enums/app_permission.dart';
+import 'package:bepoo/router/app_routes.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:bepoo/data/enums/app_permission.dart';
-import 'package:bepoo/router/app_routes.dart';
 
 class PermissionHelper {
   static Future<bool> _isAndroid13orHigher() async {
@@ -39,7 +39,7 @@ class PermissionHelper {
       final android13Permissions = [
         Permission.photos,
         Permission.videos,
-        Permission.audio
+        Permission.audio,
       ];
 
       for (final p in android13Permissions) {

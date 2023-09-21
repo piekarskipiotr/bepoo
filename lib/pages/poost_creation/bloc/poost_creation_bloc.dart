@@ -1,13 +1,13 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:injectable/injectable.dart';
 import 'package:bepoo/data/enums/poop_type.dart';
 import 'package:bepoo/data/models/poost.dart';
 import 'package:bepoo/data/repositories/auth_repository.dart';
 import 'package:bepoo/data/repositories/cloud_storage_repository.dart';
 import 'package:bepoo/data/repositories/firestore/firestore_poosts_repository.dart';
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:injectable/injectable.dart';
 
 part 'poost_creation_event.dart';
 part 'poost_creation_state.dart';

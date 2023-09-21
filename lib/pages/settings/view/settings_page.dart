@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bepoo/di/get_it.dart';
 import 'package:bepoo/l10n/l10n.dart';
 import 'package:bepoo/pages/sign_in/bloc/auth_bloc.dart';
 import 'package:bepoo/router/app_routes.dart';
 import 'package:bepoo/widgets/app_bar_icon.dart';
 import 'package:bepoo/widgets/loading_overlay/cubit/loading_overlay_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

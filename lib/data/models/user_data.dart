@@ -1,6 +1,6 @@
+import 'package:bepoo/data/models/user_friends_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:bepoo/data/models/user_friends_info.dart';
 
 part 'user_data.freezed.dart';
 part 'user_data.g.dart';

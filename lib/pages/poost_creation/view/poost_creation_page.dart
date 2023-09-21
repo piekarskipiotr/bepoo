@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bepoo/di/get_it.dart';
 import 'package:bepoo/helpers/app_action_dialog.dart';
 import 'package:bepoo/l10n/l10n.dart';
@@ -13,6 +9,10 @@ import 'package:bepoo/widgets/app_bar_icon.dart';
 import 'package:bepoo/widgets/buttons/primary_button.dart';
 import 'package:bepoo/widgets/loading_overlay/loading_overlay.dart';
 import 'package:bepoo/widgets/snackbars/error_snack_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PoostCreationPage extends StatefulWidget {
   const PoostCreationPage({super.key});

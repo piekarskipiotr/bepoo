@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bepoo/di/get_it.dart';
 import 'package:bepoo/l10n/l10n.dart';
 import 'package:bepoo/router/app_router.dart';
 import 'package:bepoo/themes/app_theme.dart';
 import 'package:bepoo/widgets/loading_overlay/loading_overlay.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

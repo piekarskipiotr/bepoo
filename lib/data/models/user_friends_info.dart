@@ -1,6 +1,6 @@
+import 'package:bepoo/data/models/user_data.dart';
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:bepoo/data/models/user_data.dart';
 
 part 'user_friends_info.freezed.dart';
 part 'user_friends_info.g.dart';

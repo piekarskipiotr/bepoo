@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:bepoo/data/models/user_data.dart';
 import 'package:bepoo/data/models/user_friends_info.dart';
 import 'package:bepoo/data/repositories/auth_repository.dart';
 import 'package:bepoo/data/repositories/firestore/firestore_friends_repository.dart';
 import 'package:bepoo/data/repositories/firestore/firestore_users_repository.dart';
 import 'package:bepoo/pages/friends/cubit/friends_state.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 @injectable
@@ -118,7 +118,7 @@ class FriendsCubit extends Cubit<FriendsState> {
         ..clear()
         ..addAll(
           friendsInfo?.receivedRequests
-                  .map((e) => e.values.first as UserData)
+                  .map((e) => e.values.first)
                   .toList() ??
               [],
         );
@@ -127,7 +127,7 @@ class FriendsCubit extends Cubit<FriendsState> {
         ..clear()
         ..addAll(
           friendsInfo?.friends
-                  .map((e) => e.values.first as UserData)
+                  .map((e) => e.values.first)
                   .toList() ??
               [],
         );

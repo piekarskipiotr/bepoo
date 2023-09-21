@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:bepoo/l10n/l10n.dart';
+import 'package:bepoo/pages/profile/bloc/profile_bloc.dart';
+import 'package:bepoo/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:bepoo/l10n/l10n.dart';
-import 'package:bepoo/pages/profile/bloc/profile_bloc.dart';
-import 'package:bepoo/widgets/buttons/primary_button.dart';
 
 class SelectedAvatarBottomSheetDialog extends StatelessWidget {
   const SelectedAvatarBottomSheetDialog({required this.image, super.key});

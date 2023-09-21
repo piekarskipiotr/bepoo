@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bepoo/l10n/l10n.dart';
 import 'package:bepoo/resources/resources.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeEmptyFeed extends StatelessWidget {
   const HomeEmptyFeed({super.key});
