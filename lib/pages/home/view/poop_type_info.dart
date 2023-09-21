@@ -32,9 +32,9 @@ class _PoopTypeInfoState extends State<PoopTypeInfo> {
       ),
       alignment: Alignment.bottomLeft,
       child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        switchInCurve: Curves.easeIn,
-        switchOutCurve: Curves.easeOut,
+        duration: const Duration(milliseconds: 100),
+        switchInCurve: Curves.slowMiddle,
+        switchOutCurve: Curves.slowMiddle,
         child: Column(
           key: ValueKey<bool>(_showDescription),
           crossAxisAlignment: CrossAxisAlignment.start,
