@@ -13,15 +13,9 @@ class FriendsEmptyList extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Center(
-          child: ColorFiltered(
-            colorFilter: const ColorFilter.mode(
-              Colors.grey,
-              BlendMode.saturation,
-            ),
-            child: Image.asset(
-              AppIcons.appIcon,
-              scale: 1.1,
-            ),
+          child: Image.asset(
+            AppIcons.appIcon,
+            scale: 1.1,
           ),
         ),
         Text(
