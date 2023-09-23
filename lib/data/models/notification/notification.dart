@@ -9,8 +9,10 @@ part 'notification.g.dart';
 class Notification with _$Notification {
   const factory Notification({
     required NotificationData data,
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'notification') required NotificationContent content,
     required String priority,
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'to') required String destinationToken,
   }) = _Notification;
 
