@@ -2,6 +2,7 @@ import 'package:bepoo/data/enums/app_permission.dart';
 import 'package:bepoo/di/get_it.dart';
 import 'package:bepoo/pages/friends/cubit/friends_cubit.dart';
 import 'package:bepoo/pages/friends/friends.dart';
+import 'package:bepoo/pages/home/cubit/home_cubit.dart';
 import 'package:bepoo/pages/home/cubit/home_feed_cubit.dart';
 import 'package:bepoo/pages/home/home.dart';
 import 'package:bepoo/pages/permission_rationale/permission_rationale.dart';
@@ -55,6 +56,9 @@ class AppRouter {
             ),
             BlocProvider.value(
               value: getIt<HomeFeedCubit>(),
+            ),
+            BlocProvider.value(
+              value: getIt<HomeCubit>(),
             ),
           ],
           child: const HomePage(),
