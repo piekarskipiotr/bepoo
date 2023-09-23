@@ -1,6 +1,7 @@
 import 'package:bepoo/data/models/poost.dart';
 import 'package:bepoo/data/models/user_data.dart';
 import 'package:bepoo/di/get_it.dart';
+import 'package:bepoo/helpers/date_helper.dart';
 import 'package:bepoo/l10n/l10n.dart';
 import 'package:bepoo/pages/home/cubit/comments_cubit.dart';
 import 'package:bepoo/pages/home/view/comments_bottom_dialog.dart';
@@ -103,7 +104,14 @@ class _PoostItemState extends State<PoostItem> {
                       style: GoogleFonts.inter(),
                     ),
                   ],
-                  const SizedBox(height: 16),
+                  Text(
+                    DateHelper.getDayMonthYearDateText(_poost.createdAt),
+                    style: GoogleFonts.inter(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   if (_poost.newestComment?.isNotEmpty ?? false) ...[
                     InkWell(
                       onTap: () => showModalBottomSheet<dynamic>(
