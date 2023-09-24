@@ -23,6 +23,7 @@ class FirestoreFriendsRepository {
 
   Future<dynamic> sendFriendRequest({
     required User currentUser,
+    required String currentUserNotificationsToken,
     required UserData targetUser,
   }) async {
     try {
@@ -34,7 +35,12 @@ class FirestoreFriendsRepository {
         }),
         _firestore.doc(targetUser.id).update({
           'receivedRequests': FieldValue.arrayUnion([
-            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
+            {
+              currentUser.uid: UserData.fromAuthUser(
+                currentUser,
+                currentUserNotificationsToken,
+              ).toJson(),
+            },
           ]),
         }),
       ]);
@@ -172,6 +178,7 @@ class FirestoreFriendsRepository {
 
   Future<void> acceptFriendRequest({
     required User currentUser,
+    required String currentUserNotificationsToken,
     required UserData targetUser,
   }) async {
     try {
@@ -208,7 +215,12 @@ class FirestoreFriendsRepository {
         }),
         _firestore.doc(targetUser.id).update({
           'friends': FieldValue.arrayUnion([
-            {currentUser.uid: UserData.fromAuthUser(currentUser).toJson()},
+            {
+              currentUser.uid: UserData.fromAuthUser(
+                currentUser,
+                currentUserNotificationsToken,
+              ).toJson(),
+            },
           ]),
           'sentRequests': FieldValue.arrayRemove([targetJson]),
         }),

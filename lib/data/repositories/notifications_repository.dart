@@ -23,12 +23,12 @@ class NotificationRepository {
     importance: Importance.high,
   );
 
-  FirebaseMessaging instance() => _instance;
-
   Stream<RemoteMessage> messageStream() => _messaging;
 
+  Future<String?> getToken() => _instance.getToken();
+
   Future<void> requestPermission() async {
-    final settings = await instance().requestPermission();
+    final settings = await _instance.requestPermission();
     if (settings.authorizationStatus != AuthorizationStatus.authorized &&
         settings.authorizationStatus != AuthorizationStatus.provisional) {
       // show permission dialog
@@ -67,7 +67,7 @@ class NotificationRepository {
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
-    await instance().setForegroundNotificationPresentationOptions(
+    await _instance.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,

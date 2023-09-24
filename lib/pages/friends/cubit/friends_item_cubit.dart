@@ -1,6 +1,7 @@
 import 'package:bepoo/data/models/user_data.dart';
 import 'package:bepoo/data/repositories/auth_repository.dart';
 import 'package:bepoo/data/repositories/firestore/firestore_friends_repository.dart';
+import 'package:bepoo/data/repositories/notifications_repository.dart';
 import 'package:bepoo/pages/friends/cubit/friends_item_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -8,10 +9,12 @@ import 'package:injectable/injectable.dart';
 @injectable
 class FriendsItemCubit extends Cubit<FriendsItemState> {
   FriendsItemCubit(
+    this._notificationRepository,
     this._friendsRepository,
     this._authRepository,
   ) : super(InitializeState());
 
+  final NotificationRepository _notificationRepository;
   final FirestoreFriendsRepository _friendsRepository;
   final AuthRepository _authRepository;
   bool isFriend = false;
@@ -29,8 +32,13 @@ class FriendsItemCubit extends Cubit<FriendsItemState> {
     try {
       final currentUser = _authRepository.getCurrentUser();
       if (currentUser == null) throw Exception('user-not-sign-in');
+
+      final token = await _notificationRepository.getToken();
+      if (token == null) throw Exception('token-cannot-be-null');
+
       await _friendsRepository.sendFriendRequest(
         currentUser: currentUser,
+        currentUserNotificationsToken: token,
         targetUser: targetUser,
       );
 
@@ -46,8 +54,13 @@ class FriendsItemCubit extends Cubit<FriendsItemState> {
     try {
       final currentUser = _authRepository.getCurrentUser();
       if (currentUser == null) throw Exception('user-not-sign-in');
+
+      final token = await _notificationRepository.getToken();
+      if (token == null) throw Exception('token-cannot-be-null');
+
       await _friendsRepository.acceptFriendRequest(
         currentUser: currentUser,
+        currentUserNotificationsToken: token,
         targetUser: targetUser,
       );
 

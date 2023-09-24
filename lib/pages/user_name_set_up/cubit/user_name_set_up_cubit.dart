@@ -4,18 +4,20 @@ import 'package:bepoo/data/models/user_data.dart';
 import 'package:bepoo/data/repositories/auth_repository.dart';
 import 'package:bepoo/data/repositories/firestore/firestore_friends_repository.dart';
 import 'package:bepoo/data/repositories/firestore/firestore_users_repository.dart';
+import 'package:bepoo/data/repositories/notifications_repository.dart';
 import 'package:bepoo/pages/user_name_set_up/cubit/user_name_set_up_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class UserNameSetUpCubit extends Cubit<UserNameSetUpState> {
-  UserNameSetUpCubit(
+  UserNameSetUpCubit(this._notificationRepository,
     this._friendsRepository,
     this._usersRepository,
     this._authRepository,
   ) : super(UserNameValidated());
 
+  final NotificationRepository _notificationRepository;
   final FirestoreFriendsRepository _friendsRepository;
   final FirestoreUsersRepository _usersRepository;
   final AuthRepository _authRepository;
@@ -51,7 +53,15 @@ class UserNameSetUpCubit extends Cubit<UserNameSetUpState> {
       final currentUser = _authRepository.getCurrentUser();
       if (currentUser == null) throw Exception('user-not-found');
 
-      final user = UserData(id: currentUser.uid, name: _name!);
+      final token = await _notificationRepository.getToken();
+      if (token == null) throw Exception('token-cannot-be-null');
+
+      final user = UserData(
+        id: currentUser.uid,
+        name: _name!,
+        notificationsToken: token,
+      );
+
       await _usersRepository.registerUserData(user);
       await _friendsRepository.createDocument(user);
       await _authRepository.updateProfile(

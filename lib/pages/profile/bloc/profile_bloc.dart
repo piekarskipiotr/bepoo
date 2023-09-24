@@ -3,6 +3,7 @@ import 'package:bepoo/data/models/user_data.dart';
 import 'package:bepoo/data/repositories/auth_repository.dart';
 import 'package:bepoo/data/repositories/cloud_storage_repository.dart';
 import 'package:bepoo/data/repositories/firestore/firestore_poosts_repository.dart';
+import 'package:bepoo/data/repositories/notifications_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ part 'profile_state.dart';
 
 @lazySingleton
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc(
+  ProfileBloc(this._notificationRepository,
     this._poostsRepository,
     this._cloudStorageRepository,
     this._authRepository,
@@ -27,11 +28,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         final poosts = _poostsRepository.getPoostsByDate(normalizedDate);
         final user = _authRepository.getCurrentUser();
         if (user == null) throw Exception('user-not-sign-in');
+        final token = await _notificationRepository.getToken();
+        if (token == null) throw Exception('token-cannot-be-null');
 
         final userData = UserData(
           id: user.uid,
           name: user.displayName!,
           avatarUrl: user.photoURL,
+          notificationsToken: token,
         );
 
         final updatedPoosts =
@@ -74,6 +78,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   final poostsList = List<Poost>.empty(growable: true);
+  final NotificationRepository _notificationRepository;
   final FirestorePoostsRepository _poostsRepository;
   final CloudStorageRepository _cloudStorageRepository;
   final AuthRepository _authRepository;
