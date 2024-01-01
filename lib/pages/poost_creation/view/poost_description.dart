@@ -29,8 +29,7 @@ class _PoostDescriptionState extends State<PoostDescription> {
           ),
           const SizedBox(height: 8),
           TextFormField(
-            onChanged: (desc) =>
-                context.read<PoostCreationBloc>().description = desc,
+            onChanged: (desc) => context.read<PoostCreationBloc>().description = desc,
             maxLines: 4,
             maxLength: 255,
             decoration: InputDecoration(
